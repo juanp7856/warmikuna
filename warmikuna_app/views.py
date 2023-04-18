@@ -1,13 +1,25 @@
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
 # Create your views here.
-def login(request):
+def ingreso(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(username = username, password = password)
+
+        if user is not None:
+            login(request, user)
+            render(request, 'auth/registrar.html')
+        
+        else: 
+            messages.error(request, "¡Usuario o contraseña incorrectos!")
+
     return(render(request, 'auth/ingreso.html'))
 
-def register(request):
-    return(render(request, 'auth/registrar.html'))
+def registro(request):
 
-def create_user(request):
-    if request.method == 'POST':
-        pass
-    pass
+
+    return(render(request, 'auth/registrar.html'))

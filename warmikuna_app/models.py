@@ -23,16 +23,14 @@ class Denuncia(models.Model):
     imagenes = models.ImageField(null=True, blank=True, upload_to='images/') 
 
 
-
-
-
-
-
 @receiver(post_save, sender = User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Usuario.objects.create(user=instance)
+    else:
+        return
 
 @receiver(post_save, sender = User)
 def save_user_profile(sender, instance, **kwargs):
-    instance.usuario.save()
+    # instance.usuario.save()
+    return

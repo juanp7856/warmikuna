@@ -1,3 +1,5 @@
+{% load static %}  
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,7 +7,7 @@
 	<title>Login</title> 
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="{% static 'auth/style.css' %}">
 </head>  
 <body>
     <form class="formulario">
@@ -20,7 +22,7 @@
          <input type="password" placeholder="Contraseña">
          </div>
          <input type="submit" value="Login" class="button">
-         <p>¿No tienes una cuenta? <a class="link" href="registrar.html">Registrate </a></p>
+         <p>¿No tienes una cuenta? <a class="link" href="{% url 'registro' %}">Registrate </a></p>
      </div>
     </form>
 </body>

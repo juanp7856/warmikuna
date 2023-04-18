@@ -1,3 +1,5 @@
+{% load static %}  
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,7 +7,7 @@
 	<title>Registro</title> 
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="{% static 'auth/style.css' %}">
 </head>  
 <body>
  <form class="formulario">
@@ -24,7 +26,7 @@
          <input type="password" placeholder="Repetir contraseña">
          </div>
          <input type="submit" value="Registrate" class="button">
-         <p>¿Ya tienes una cuenta? <a class="link" href="ingreso.html">Iniciar Sesion</a></p>
+         <p>¿Ya tienes una cuenta? <a class="link" href="{% url 'ingreso' %}">Iniciar Sesion</a></p>
      </div>
     </form>
 </body>

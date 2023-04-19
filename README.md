@@ -3,7 +3,9 @@ Warmikuna es un proyecto desarrollado por estudiantes del curso Ing. Software 2 
 Está desarrollado en el framework de Django bajo un patrón de diseño Modelo Vista Template ~ Modelo Vista Controlador, haciendo uso de las modelos y herramienta que dispone el framework así como el manejo de templates en HTML.
 
 El proyecto está enfocado actualmente a mujeres que deseen realizar denuncias tanto de forma anónima como habituales directamente al M.I.M.P. (Bajo un entorno simulado) en el cuál puedan adjuntar información y evidencias. Así también en la plataforma se podrían observar cursos, talleres y más funciones que serán agregadas mientras esté en desarrollo.
-##Instalaciones necesarias
+
+## Instalaciones necesarias
+
 Antes de instalar debes poseer python y pip.
 Si no tienes python puedes descargarlo [aquí](https://www.python.org/downloads/ "aquí").
 Si no tienes pip asegúrate de descargarlo desde [aquí](http://https://pip.pypa.io/en/stable/installation/ "aquí").

@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+	<title>Inicio</title>
+	<link rel="stylesheet" href="{% static 'main/main.css' %}">
+</head>
+<body>
+	<header class="header">
+		<div class="container">
+		<div class="btn-menu">
+			<label for="btn-menu">☰ Menú</label>
+		</div>
+			<form class="formulario" method="POST">
+				{% csrf_token %}
+				<h1>D E N U N C I A R</h1>
+				<div class="contenedor">
+					<p class="tipo">Tipo de denuncia</p>
+					<i class="fas fa-user icon"></i>
+					<select required name="tipo" id="tipo">
+						<option value="1">Con datos</option>
+						<option value="2">Anónima</option>
+					</select>
+					</div>
+					<div class="input-contenedor">
+						<i class="fas fa-date icon"></i>
+						<input required type="date" id="fecha" name="fecha" placeholder="Fecha">
+					</div>
+					<div class="input-contenedor">
+						<i class="fas fa-user icon"></i>
+						<input required type="text" id="denunciado" name="denunciado" placeholder="Persona a denunciar">
+					</div>
+					<div class="input-contenedor">
+						<i class="fas fa-pencil icon"></i>
+						<input required type="text" id="descripcion" name="descripcion" placeholder="Descripcion">
+					</div>
+					<input type="submit" value="Enviar" class="button">
+					<p><a class="link" href="">Regresar</a></p>
+				</div>
+			</form>
+		</div>
+	</header>
+	<div class="capa"></div>
+<input type="checkbox" id="btn-menu">
+<div class="container-menu">
+	<div class="cont-menu">
+		<nav>
+			<a class="link" href="">Realizar denuncia</a>
+			<a class="link" href="">Cursos y Talleres</a>
+			<a class="link" href="">Consultas</a>
+			<a class="link" href="">Asesoramiento del MIMP</a>
+			<a class="link" href="">Actualizar datos del perfil</a>
+			<a href="#">Lenguaje</a>
+			<a class="link" href="{% url 'salir' %}">Cerrar sesion</a>
+		</nav>
+		<label for="btn-menu">✖️</label>
+	</div>
+</div>
+</body>
+</html>

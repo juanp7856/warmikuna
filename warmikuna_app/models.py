@@ -20,7 +20,8 @@ class Denuncia(models.Model):
     user = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True)
     descripcion = models.CharField(max_length=500)
     denunciado = models.CharField(max_length=40)
-    imagenes = models.ImageField(null=True, blank=True, upload_to='images/') 
+    fecha = models.DateField(null=True)
+    # imagenes = models.ImageField(null=True, blank=True, upload_to='images/') 
 
 
 @receiver(post_save, sender = User)

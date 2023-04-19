@@ -63,6 +63,15 @@ p{
 .link:hover{
      color: rgb(95, 160, 148);
 }
+.alerta{
+    background-color: lightcoral;
+    border-radius: 0.5rem;
+    border: 0.5rem;
+    justify-content: center;
+    color: black;
+    align-items: center;
+    padding: 2%;
+}
 @media(min-width:768px)
 {
     .formulario{

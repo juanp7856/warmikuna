@@ -7,23 +7,29 @@
 	<title>Registro</title> 
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
-	<link rel="stylesheet" href="{% static 'auth/style.css' %}">
+	<link rel="stylesheet" href="{% static 'auth/style_auth.css' %}">
 </head>  
 <body>
- <form class="formulario">
+ <form class="formulario" method="POST">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {{ form.errors }}
     <h1>Registrate</h1>
      <div class="contenedor">
      <div class="input-contenedor">
          <i class="fas fa-user icon"></i>
-         <input type="text" placeholder="Correo electrónico">
+         {{form.username}}
+         {% comment %} <input type="text" placeholder="Correo electrónico"> {% endcomment %}
          </div>
          <div class="input-contenedor">
-         <i class="fas fa-envelope icon"></i>
-         <input type="text" placeholder="Contraseña">
+         <i class="fas fa-key icon"></i>
+         {{form.password1}}
+         {% comment %} <input type="password" placeholder="Contraseña"> {% endcomment %}
          </div>
          <div class="input-contenedor">
         <i class="fas fa-key icon"></i>
-         <input type="password" placeholder="Repetir contraseña">
+          {{form.password2}}
+         {% comment %} <input type="password" placeholder="Repetir contraseña"> {% endcomment %}
          </div>
          <input type="submit" value="Registrate" class="button">
          <p>¿Ya tienes una cuenta? <a class="link" href="{% url 'ingreso' %}">Iniciar Sesion</a></p>

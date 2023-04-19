@@ -1,0 +1,69 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+	<title>Inicio</title>
+	<link rel="stylesheet" href="{% static 'main/main.css' %}">
+</head>
+<body>
+	<header class="header">
+		<div class="container">
+		<div class="btn-menu">
+			<label for="btn-menu">☰ Menú</label>
+		</div>
+            <form class="formulario" method="POST">
+                {% csrf_token %}
+                <h1>Datos personales</h1>
+                <div class="contenedor">
+                <div class="input-contenedor">
+                        <i class="fas fa-user icon"></i>
+                        <input id="nombre" name="nombre" required type="text" placeholder="Nombres" maxlength="20">
+                    </div>
+                    <div class="input-contenedor">
+                        <i class="fas fa-user icon"></i>
+                        <input id="apellido" name="apellido" required type="text" placeholder="Apellidos" maxlength="20">
+                    </div>
+                    <div class="input-contenedor">
+                        <i class="fas fa-user icon"></i>
+                        <input id="dni" name="dni" required type="text" placeholder="DNI" maxlength="8">
+                    </div>
+                    <div class="input-contenedor">
+                        <i class="fas fa-date icon"></i>
+                        <input id="fnacim" name="fnacim" required type="date" placeholder="Fecha de nacimiento">
+                    </div>
+                    <div class="input-contenedor">
+                        <i class="fas fa-phone icon"></i>
+                        <input id="numero" name="numero" required type="tel" placeholder="Número de teléfono" maxlength="9">
+                    </div>
+                    <input type="submit" value="Guardar" class="button">
+                    {%for message in messages%}
+                    <div class="alerta" role="alert">
+                        <strong>{{message}}</strong>
+                    </div>
+                    {% endfor %}
+                    {% comment %} <p><a class="link" href="main.html">Regresar</a></p> {% endcomment %}
+                </div>
+            </form>
+		</div>
+	</header>
+	<div class="capa"></div>
+<input type="checkbox" id="btn-menu">
+<div class="container-menu">
+	<div class="cont-menu">
+		<nav>
+			<a class="link" href="denuncia.html">Realizar denuncia</a>
+			<a class="link" href="curso.html">Cursos y Talleres</a>
+			<a class="link" href="consulta.html">Consultas</a>
+			<a class="link" href="asesor.html">Asesoramiento del MIMP</a>
+            <a class="link" href="datos.html">Actualizar datos del perfil</a>
+			<a href="#">Lenguaje</a>
+		</nav>
+		<label for="btn-menu">✖️</label>
+	</div>
+</div>
+</body>
+</html>

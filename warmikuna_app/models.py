@@ -12,6 +12,7 @@ class Usuario(models.Model):
     apellido = models.CharField(null=True, max_length=20)
     numero = models.CharField(null=True, max_length=9)
     fnacim = models.DateField(null=True)
+    passwordResetToken = models.CharField(null=True, max_length=100)
 
     def __str__(self):
         return self.user.username

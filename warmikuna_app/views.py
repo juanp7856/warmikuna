@@ -2,10 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+
+from warmikuna_app.sendmail import send_forget_password_mail
 from .forms import RegistroForm
 from django.contrib import messages
 from django.http import HttpResponse
 from .models import Denuncia, Usuario
+import uuid
 
 # Create your views here.
 def ingreso(request):
@@ -127,3 +130,54 @@ def ingresar_datos(request):
         return redirect('registro')
 
     return render(request, 'main/datos.html')
+
+def olvidoContrasena(request):
+    try:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            
+            if not User.objects.filter(username=username).first():
+                messages.success(request, 'No eixste .')
+                return redirect('password-forgot')
+            
+            user_obj = User.objects.get(username = username)
+            token = str(uuid.uuid4())
+            usuario_obj= Usuario.objects.get(user = user_obj)
+            usuario_obj.passwordResetToken = token
+            usuario_obj.save()
+            send_forget_password_mail(user_obj.username , token)
+            messages.success(request, 'Se envió el correo.')
+            return redirect('password-forgot')
+    
+    except Exception as e:
+        print(e)
+    return render(request , 'auth/password-forgot.html')
+
+def reestablecerContrasena(request, token):
+    context = {}
+
+    try:
+        usuario_obj = Usuario.objects.filter(passwordResetToken = token).first()
+        context = {'user_id' : usuario_obj.user.id}
+
+        if request.method == 'POST':
+            new_password = request.POST.get('new_password')
+            confirm_password = request.POST.get('reconfirm_password')
+            user_id = request.POST.get('user_id')
+            
+            if user_id is  None:
+                messages.success(request, 'No se encontró id de usuario.')
+                return redirect(f'password-reset/{token}/')
+            
+            if  new_password != confirm_password:
+                messages.success(request, 'Contraseñas no coinciden.')
+                return redirect(f'password-reset/{token}/')
+            
+            user_obj = User.objects.get(id = user_id)
+            user_obj.set_password(new_password)
+            user_obj.save()
+            return redirect('ingreso')
+            
+    except Exception as e:
+        print(e)
+    return render(request , 'password-reset.html' , context)

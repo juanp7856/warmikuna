@@ -11,4 +11,6 @@ urlpatterns = [
     path('logout', views.salir, name="salir"),
     path('', views.denuncia, name="denuncia"),
     path('datos', views.ingresar_datos, name="datos"),
+    path('password-forgot', views.olvidoContrasena, name="password-forgot"),
+    path('password-reset/<token>/', views.reestablecerContrasena, name="password-reset"),
 ]

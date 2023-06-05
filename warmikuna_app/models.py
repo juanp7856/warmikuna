@@ -41,6 +41,15 @@ class Imagen(models.Model):
     denuncia = models.ForeignKey(Denuncia, on_delete=models.CASCADE, null=True)
     imagen = models.ImageField(null=True, blank=True, upload_to='images/') 
 
+class Taller(models.Model):
+    video = models.URLField(null=True, blank=True)
+    titulo = models.CharField(max_length=40)
+    descripcion = models.CharField(max_length=200)
+    
+class TallerXUsuario(models.Model):
+    user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    taller = models.ForeignKey(Taller, on_delete=models.CASCADE)
+
 
 @receiver(post_save, sender = User)
 def create_user_profile(sender, instance, created, **kwargs):

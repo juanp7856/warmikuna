@@ -1,43 +1,87 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
   	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
-	<title>Inicio</title>
-	<link rel="stylesheet" href="main.css">
+	<title>Consultas</title>
+	<link rel="stylesheet" href="{% static 'main/main.css' %}">
 </head>
 <body>
 	<header class="header">
 		<div class="container">
-		<div class="btn-menu">
-			<label for="btn-menu">☰ Menú</label>
-		</div>
-        <!--
-			<div class="logo">
-				<h1>Logotipo</h1>
+			<div class="btn-menu">
+				<label for="btn-menu">☰ Menú</label>
 			</div>
-			<nav class="menu">
-				<a href="#">Inicio</a>
-				<a href="#">Sobre nosotros</a>
-			</nav>
-        --------------->
 		</div>
 	</header>
 	<div class="capa"></div>
-<input type="checkbox" id="btn-menu">
-<div class="container-menu">
-	<div class="cont-menu">
-		<nav>
-			<a class="link" href="denuncia.html">Realizar denuncia</a>
-			<a class="link" href="curso.html">Cursos y Talleres</a>
-			<a class="link" href="consulta.html">Consultas</a>
-			<a class="link" href="asesor.html">Asesoramiento del MIMP</a>
-			<a class="link" href="datos.html">Actualizar datos del perfil</a>
-			<a href="#">Lenguaje</a>
-		</nav>
-		<label for="btn-menu">✖️</label>
+	<input type="checkbox" id="btn-menu">
+	<div class="container-menu">
+		<div class="cont-menu">
+			<nav>
+				<a class="link" href="{% url 'denuncia' %}">Realizar denuncia</a>
+				<a class="link" href="curso.html">Cursos y Talleres</a>
+				<a class="link" href="{% url 'consulta' %}">Consultas</a>
+				<a class="link" href="asesor.html">Asesoramiento del MIMP</a>
+				<a class="link" href="datos.html">Actualizar datos del perfil</a>
+				<a href="#">Lenguaje</a>
+				<select id="selectIdioma" onchange="cambiarIdioma()">
+					<option value="es">Español</option>
+					<option value="en">English</option>
+				</select>
+				<button onclick="cambiarModoDaltonico()">Modo Daltonico</button>
+				<a class="link" href="{% url 'salir' %}">Cerrar sesión</a>
+			</nav>
+			<label for="btn-menu">✖️</label>
+		</div>
 	</div>
-</div>
+
+	<main class="main">
+		<div class="container">
+			<h1>Estado de Denuncia</h1>
+			<p>Aquí puedes consultar en que estado se encuentran tus denuncias:</p>
+			<div class="wrap-tarjetas">
+				{% for denuncia in denuncias %}
+					<div class="tarjeta-consulta">
+						<p><span>Denunciado: </span>{{denuncia.denunciado}}</p>
+						<p><span>Fecha: </span>{{denuncia.fecha}}</p>
+						<p><span>Estado: </span>{{denuncia.estado}}</p>
+					</div>
+				{% endfor %}
+			</div>
+
+			<form class="formulario" method="POST">
+				{% csrf_token %}
+				<div class="input-contenedor">
+					<i class="fas fa-search icon"></i>
+					<input required type="text" id="id" name="id" placeholder="ID único de denuncia">
+				</div>
+				<input type="submit" value="Consultar" class="button">
+			</form>
+			
+			<div class="wrap-tarjetas">	
+				{% for message in messages %}
+					<div class="alerta" role="alert">
+						<strong>{{ message }}</strong>
+					</div>
+				{% endfor %}
+			</div>
+			
+
+			<div class="wrap-tarjetas">
+				{% if denunciabuscada %}
+				<div class="tarjeta-consulta">
+					<p><span>Denunciado: </span>{{denunciabuscada.denunciado}}</p>
+					<p><span>Fecha: </span>{{denunciabuscada.fecha}}</p>
+					<p><span>Estado: </span>{{denunciabuscada.estado}}</p>
+				</div>
+				{% endif %}
+			</div>
+			
+			
+		</div>
+	</main>
 </body>
 </html>

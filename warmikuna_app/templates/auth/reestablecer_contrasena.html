@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Recuperar Contraseña</title> 
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+	<link rel="stylesheet" href="{% static 'auth/style_auth.css' %}">
+</head>
+<body>
+	<form class="formulario" method="POST">
+		{% csrf_token %}
+		<h1>Reestablecer Contraseña</h1>
+		<div class="contenedor">
+			<div class="input-contenedor">
+				<i class="fas fa-key icon"></i>
+				<input required type="password" id="new_password" name="new_password" placeholder="Nueva contraseña">
+			</div>
+            <div class="input-contenedor">
+				<i class="fas fa-key icon"></i>
+				<input required type="password" id="reconfirm_password" name="reconfirm_password" placeholder="Repetir nueva contraseña">
+			</div>
+            <input type="hidden" name="user_id" value="{{user_id}}">
+			<button type="submit" class="button">Reestablecer</button>
+			<p><a class="link" href="{% url 'ingreso' %}">Volver al inicio de sesión</a></p>
+			{% for message in messages %}
+				<div class="alerta" role="alert">
+					<strong>{{ message }}</strong>
+				</div>
+			{% endfor %}
+		</div>
+	</form>
+</body>
+</html>

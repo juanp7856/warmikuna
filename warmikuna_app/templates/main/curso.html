@@ -1,43 +1,99 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
-  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
-	<title>Inicio</title>
+	<title>Talleres y Cursos</title>
 	<link rel="stylesheet" href="main.css">
+	<!-- PONLO EN EL MAIN CSS
+		.comentario {
+			margin-bottom: 10px;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+	--------------->
+	</style>
 </head>
 <body>
 	<header class="header">
 		<div class="container">
-		<div class="btn-menu">
-			<label for="btn-menu">☰ Menú</label>
-		</div>
-        <!--
-			<div class="logo">
-				<h1>Logotipo</h1>
+			<div class="btn-menu">
+				<label for="btn-menu">☰ Menú</label>
 			</div>
-			<nav class="menu">
-				<a href="#">Inicio</a>
-				<a href="#">Sobre nosotros</a>
-			</nav>
-        --------------->
 		</div>
 	</header>
 	<div class="capa"></div>
-<input type="checkbox" id="btn-menu">
-<div class="container-menu">
-	<div class="cont-menu">
-		<nav>
-			<a class="link" href="denuncia.html">Realizar denuncia</a>
-			<a class="link" href="curso.html">Cursos y Talleres</a>
-			<a class="link" href="consulta.html">Consultas</a>
-			<a class="link" href="asesor.html">Asesoramiento del MIMP</a>
-			<a class="link" href="datos.html">Actualizar datos del perfil</a>
-			<a href="#">Lenguaje</a>
-		</nav>
-		<label for="btn-menu">✖️</label>
+	<input type="checkbox" id="btn-menu">
+	<div class="container-menu">
+		<div class="cont-menu">
+			<nav>
+				<a class="link" href="denuncia.html">Realizar denuncia</a>
+				<a class="link" href="curso.html">Cursos y Talleres</a>
+				<a class="link" href="consulta.html">Consultas</a>
+				<a class="link" href="asesor.html">Asesoramiento del MIMP</a>
+				<a class="link" href="datos.html">Actualizar datos del perfil</a>
+				<a href="#">Lenguaje</a>
+				<select id="selectIdioma" onchange="cambiarIdioma()">
+					<option value="es">Español</option>
+					<option value="en">English</option>
+				</select>
+				<button onclick="cambiarModoDaltonico()">Modo Daltonico</button>
+				<a class="link" href="{% url 'salir' %}">Cerrar sesión</a>
+			</nav>
+			<label for="btn-menu">✖️</label>
+		</div>
 	</div>
-</div>
+	<div class="container">
+		<h1>Talleres y Cursos</h1>
+		<div class="videos">
+			<h2>Videos disponibles:</h2>
+			<ul>
+				<li><a href="video1.mp4">Video 1</a></li>
+				<li><a href="video2.mp4">Video 2</a></li>
+				<li><a href="video3.mp4">Video 3</a></li>
+			</ul>
+		</div>
+		<div class="talleres">
+			<h2>Talleres disponibles:</h2>
+			<ul>
+				<li>Taller 1 <button type="button" onclick="inscribirTaller(1)">Inscribirse</button></li>
+				<li>Taller 2 <button type="button" onclick="inscribirTaller(2)">Inscribirse</button></li>
+				<li>Taller 3 <button type="button" onclick="inscribirTaller(3)">Inscribirse</button></li>
+			</ul>
+		</div>
+	</div>
+	
+	<div id="comentarios">
+		<h2>Comentarios</h2>
+		<div id="comentariosLista"></div>
+		<form id="formComentario" onsubmit="return agregarComentario()">
+			<input id="nombreComentario" required type="text" placeholder="Nombre" maxlength="20">
+			<textarea id="contenidoComentario" required placeholder="Escribe tu comentario"></textarea>
+			<input type="submit" value="Enviar" class="button">
+		</form>
+	</div>
+
+	<script>
+		function inscribirTaller(idTaller) {
+			console.log("Inscripción al taller " + idTaller);
+		}
+		function agregarComentario() {
+			var nombre = document.getElementById("nombreComentario").value;
+			var contenido = document.getElementById("contenidoComentario").value;
+
+			var comentario = document.createElement("div");
+			comentario.className = "comentario";
+			comentario.innerHTML = "<h4>" + nombre + "</h4><p>" + contenido + "</p>";
+
+			var comentariosLista = document.getElementById("comentariosLista");
+			comentariosLista.appendChild(comentario);
+
+			document.getElementById("nombreComentario").value = "";
+			document.getElementById("contenidoComentario").value = "";
+			return false;
+		}
+	</script>
 </body>
 </html>

@@ -1,5 +1,4 @@
-{% load static %}  
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,38 +7,60 @@
   	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
 	<title>Inicio</title>
 	<link rel="stylesheet" href="{% static 'main/main.css' %}">
+	<!-- PONLO EN EL MAIN CSS
+		body.daltonico {
+			filter: grayscale(100%);
+		}
+		.daltonico .container-menu a,
+		.daltonico .container-menu label {
+			color: #000;
+		}
+	--------------->
+	<script>
+		function cambiarModoDaltonico() {
+			document.body.classList.toggle('daltonico');
+		}
+		
+		function cambiarIdioma() {
+			var selectIdioma = document.getElementById("selectIdioma");
+			var idiomaSeleccionado = selectIdioma.value;
+			if (idiomaSeleccionado === "es") {
+				window.location.href = "inicio.html";
+			} else if (idiomaSeleccionado === "en") {
+				window.location.href = "home.html";
+			}
+		}
+	</script>
+	
 </head>
 <body>
 	<header class="header">
 		<div class="container">
-		<div class="btn-menu">
-			<label for="btn-menu">☰ Menú</label>
-		</div>
-        <!--
-			<div class="logo">
-				<h1>Logotipo</h1>
+			<div class="btn-menu">
+				<label for="btn-menu">☰ Menú</label>
 			</div>
-			<nav class="menu">
-				<a href="#">Inicio</a>
-				<a href="#">Sobre nosotros</a>
-			</nav>
-        --------------->
 		</div>
 	</header>
 	<div class="capa"></div>
-<input type="checkbox" id="btn-menu">
-<div class="container-menu">
-	<div class="cont-menu">
-		<nav>
-			<a class="link" href="denuncia.html">Realizar denuncia</a>
-			<a class="link" href="curso.html">Cursos y Talleres</a>
-			<a class="link" href="consulta.html">Consultas</a>
-			<a class="link" href="asesor.html">Asesoramiento del MIMP</a>
-			<a class="link" href="datos.html">Actualizar datos del perfil</a>
-			<a href="#">Lenguaje</a>
-		</nav>
-		<label for="btn-menu">✖️</label>
+	<input type="checkbox" id="btn-menu">
+	<div class="container-menu">
+		<div class="cont-menu">
+			<nav>
+				<a class="link" href="denuncia.html">Realizar denuncia</a>
+				<a class="link" href="curso.html">Cursos y Talleres</a>
+				<a class="link" href="consulta.html">Consultas</a>
+				<a class="link" href="asesor.html">Asesoramiento del MIMP</a>
+				<a class="link" href="datos.html">Actualizar datos del perfil</a>
+				<a href="#">Lenguaje</a>
+				<select id="selectIdioma" onchange="cambiarIdioma()">
+					<option value="es">Español</option>
+					<option value="en">English</option>
+				</select>
+				<button onclick="cambiarModoDaltonico()">Modo Daltonico</button>
+				<a class="link" href="{% url 'salir' %}">Cerrar sesión</a>
+			</nav>
+			<label for="btn-menu">✖️</label>
+		</div>
 	</div>
-</div>
 </body>
 </html>

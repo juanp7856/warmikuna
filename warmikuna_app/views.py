@@ -7,7 +7,7 @@ from warmikuna_app.sendmail import send_forget_password_mail
 from .forms import RegistroForm
 from django.contrib import messages
 from django.http import HttpResponse
-from .models import Denuncia, Usuario
+from .models import Denuncia, Usuario, Imagen
 import uuid
 
 # Create your views here.
@@ -41,7 +41,6 @@ def salir(request):
         return redirect('denuncia')
     
 def registro(request):
-    errors = {}
     if request.user.is_anonymous:
         if request.method == "POST":
             form = RegistroForm(request.POST)
@@ -50,22 +49,30 @@ def registro(request):
                 password = form.clean_password2("password1", "password2")
                 form.save()
                 user = authenticate(username = username, password = password)
+
                 if user is not None:
                     login(request, user)
                     request.session['r_registro'] = True
                     return redirect('datos')
                 return redirect('ingreso')
             else:
-                errors = form.errors.as_json()
-                print(form.errors.as_data())
+                print("es invalido")
+                print(form.errors.items())
+
+                for error in form.errors.items():
+                    messages.error(request, error[1])
+                    print(error[1])
     else: 
         return redirect('denuncia')
 
     form = RegistroForm()
-    context = {"form": form, "errors": errors}
+    context = {"form": form}
     return render(request, 'auth/registrar.html', context)
 
 def denuncia(request):
+    tamano_max = 5
+    MEGABYTE = 1024 * 1024
+
     if request.user.is_authenticated:
         if request.method == "POST":
             if request.POST.get("tipo")=="1":
@@ -73,21 +80,36 @@ def denuncia(request):
                 fecha = request.POST.get("fecha")
                 denunciado = request.POST.get("denunciado")
                 descripcion = request.POST.get("descripcion")
+                imagenes = request.FILES.getlist('evidencia')
                 nueva_denuncia = Denuncia(user=user, fecha=fecha, denunciado=denunciado, descripcion=descripcion)
                 nueva_denuncia.save()
+
+                for i in imagenes:
+                    if i.size > tamano_max * MEGABYTE:
+                        messages.error(request, 'Uno de los archivos excede el peso límite de 5MB')
+                        return redirect('denuncia')
+
+                    nuevaImagen = Imagen(denuncia=nueva_denuncia, imagen=i)
+                    nuevaImagen.save()
+
+                messages.success(request, 'Denuncia enviada')
+                return redirect('denuncia')
 
             elif request.POST.get("tipo")=="2":
                 fecha = request.POST.get("fecha")
                 denunciado = request.POST.get("denunciado")
                 descripcion = request.POST.get("descripcion")
-                nueva_denuncia = Denuncia(fecha=fecha, denunciado=denunciado, descripcion=descripcion)
+                id_anonimo = str(uuid.uuid4())
+                nueva_denuncia = Denuncia(fecha=fecha, denunciado=denunciado, descripcion=descripcion, id_anonimo=id_anonimo)
                 nueva_denuncia.save()
+
+                messages.success(request, f'Denuncia enviada, tu ID para la consulta es: {id_anonimo}')
+                return redirect('denuncia')
+
 
     else:
         return redirect('ingreso')
-                
-
-
+        
     return render(request, 'main/denuncia.html')
 
 def ingresar_datos(request):
@@ -137,7 +159,7 @@ def olvidoContrasena(request):
             username = request.POST.get('username')
             
             if not User.objects.filter(username=username).first():
-                messages.success(request, 'No eixste .')
+                messages.success(request, 'No existe ese usuario.')
                 return redirect('password-forgot')
             
             user_obj = User.objects.get(username = username)
@@ -151,7 +173,7 @@ def olvidoContrasena(request):
     
     except Exception as e:
         print(e)
-    return render(request , 'auth/password-forgot.html')
+    return render(request , 'auth/recuperar_contrasena.html')
 
 def reestablecerContrasena(request, token):
     context = {}
@@ -180,4 +202,30 @@ def reestablecerContrasena(request, token):
             
     except Exception as e:
         print(e)
-    return render(request , 'password-reset.html' , context)
+    return render(request , 'auth/reestablecer_contrasena.html' , context)
+
+def consultaDenuncias(request):
+    context = {}
+
+    if request.user.is_authenticated:
+        user = request.user
+        usuario = Usuario.objects.get(user=user)
+        denuncias = Denuncia.objects.filter(user=usuario)
+        context = {'denuncias': denuncias}
+
+        if request.method == 'POST':
+            try:
+                id = request.POST.get('id')
+                denunciaBuscada = Denuncia.objects.get(id_anonimo=id)
+                context = {'denuncias': denuncias, 'denunciabuscada': denunciaBuscada}
+                
+                return render(request, 'main/consulta.html', context)
+            except Exception as e:
+                messages.error(request, 'No existe esa ID de denuncia')
+                return redirect('consulta')
+                print(e)
+
+        return render(request, 'main/consulta.html', context)
+
+    else:
+        redirect('ingreso')

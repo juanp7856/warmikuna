@@ -18,11 +18,28 @@ class Usuario(models.Model):
         return self.user.username
 
 class Denuncia(models.Model):
+    ESTADOS = [
+        ("Enviado", "Enviado"),
+        ("En investigación", "En investigación"),
+        ("Archivado", "Archivado"),
+        ("Cerrado", "Cerrado"),
+        ("Requiere más datos", "Requiere más datos")
+    ]
+
     user = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True)
     descripcion = models.CharField(max_length=500)
     denunciado = models.CharField(max_length=40)
     fecha = models.DateField(null=True)
-    # imagenes = models.ImageField(null=True, blank=True, upload_to='images/') 
+    id_anonimo = models.CharField(null=True, blank=True, max_length=100)
+    estado = models.CharField(choices=ESTADOS, max_length=20, default="Enviado")
+
+    def __str__(self):
+        return 'Denunciado: {}'.format(self.denunciado)
+    
+
+class Imagen(models.Model):
+    denuncia = models.ForeignKey(Denuncia, on_delete=models.CASCADE, null=True)
+    imagen = models.ImageField(null=True, blank=True, upload_to='images/') 
 
 
 @receiver(post_save, sender = User)

@@ -12,8 +12,6 @@
 <body>
  <form class="formulario" method="POST">
     {% csrf_token %}
-    {{ form.non_field_errors }}
-    {{ form.errors }}
     <h1>Registrate</h1>
      <div class="contenedor">
      <div class="input-contenedor">
@@ -31,6 +29,11 @@
           {{form.password2}}
          {% comment %} <input type="password" placeholder="Repetir contraseña"> {% endcomment %}
          </div>
+          {% for message in messages %}
+					<div class="alerta" role="alert">
+						<strong>{{ message }}</strong>
+					</div>
+					{% endfor %}
          <input type="submit" value="Registrate" class="button">
          <p>¿Ya tienes una cuenta? <a class="link" href="{% url 'ingreso' %}">Iniciar Sesion</a></p>
      </div>

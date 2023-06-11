@@ -26,12 +26,19 @@ class Denuncia(models.Model):
         ("Requiere más datos", "Requiere más datos")
     ]
 
+    MOTIVO = [
+        ("Abuso", "Abuso"),
+        ("Acoso", "Acoso"),
+        ("Maltrato", "Maltrato")
+    ]
+
     user = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True)
     descripcion = models.CharField(max_length=500)
     denunciado = models.CharField(max_length=40)
     fecha = models.DateField(null=True)
     id_anonimo = models.CharField(null=True, blank=True, max_length=100)
     estado = models.CharField(choices=ESTADOS, max_length=20, default="Enviado")
+    motivo = models.CharField(choices=MOTIVO, max_length=20, default="Abuso")
 
     def __str__(self):
         return 'Denunciado: {}'.format(self.denunciado)

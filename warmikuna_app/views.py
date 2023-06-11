@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
+from patron_diseno.fabricaabstracta.fabricaAbstractaDenunciaAnonimo import FabricaDenunciaAnonima
+from patron_diseno.fabricaabstracta.fabricaAbstractaDenunciaDatos import FabricaDenunciaDatos
 from warmikuna_app.sendmail import send_forget_password_mail
 from .forms import RegistroForm
 from django.contrib import messages
@@ -70,38 +71,48 @@ def registro(request):
     return render(request, 'auth/registrar.html', context)
 
 def denuncia(request):
-    tamano_max = 5
-    MEGABYTE = 1024 * 1024
 
     if request.user.is_authenticated:
         if request.method == "POST":
+            fecha = request.POST.get("fecha")
+            denunciado = request.POST.get("denunciado")
+            descripcion = request.POST.get("descripcion")
+            imagenes = request.FILES.getlist('evidencia')
+            motivo = request.FILES.get("motivo")
+            
             if request.POST.get("tipo")=="1":
                 user = Usuario.objects.get(user=request.user)
-                fecha = request.POST.get("fecha")
-                denunciado = request.POST.get("denunciado")
-                descripcion = request.POST.get("descripcion")
-                imagenes = request.FILES.getlist('evidencia')
-                nueva_denuncia = Denuncia(user=user, fecha=fecha, denunciado=denunciado, descripcion=descripcion)
-                nueva_denuncia.save()
 
-                for i in imagenes:
-                    if i.size > tamano_max * MEGABYTE:
-                        messages.error(request, 'Uno de los archivos excede el peso límite de 5MB')
-                        return redirect('denuncia')
+                fabricaDatos = FabricaDenunciaDatos()
 
-                    nuevaImagen = Imagen(denuncia=nueva_denuncia, imagen=i)
-                    nuevaImagen.save()
+                if(motivo == "1"):
+                    denuncia = fabricaDatos.crearDenunciaAbuso()
+                elif(motivo == "2"):
+                    denuncia = fabricaDatos.crearDenunciaAcoso()
+                else:
+                    denuncia = fabricaDatos.crearDenunciaMaltrato()
+
+                nueva_denuncia = denuncia.guardarDenuncia(user,descripcion,denunciado,fecha)
+                denuncia.guardarImagenes(imagenes,nueva_denuncia)
 
                 messages.success(request, 'Denuncia enviada')
                 return redirect('denuncia')
 
             elif request.POST.get("tipo")=="2":
-                fecha = request.POST.get("fecha")
-                denunciado = request.POST.get("denunciado")
-                descripcion = request.POST.get("descripcion")
-                id_anonimo = str(uuid.uuid4())
-                nueva_denuncia = Denuncia(fecha=fecha, denunciado=denunciado, descripcion=descripcion, id_anonimo=id_anonimo)
-                nueva_denuncia.save()
+                fabricaAnonima = FabricaDenunciaAnonima()
+
+                if(motivo == "1"):
+                    denuncia = fabricaAnonima.crearDenunciaAbuso()
+                elif(motivo == "2"):
+                    denuncia = fabricaAnonima.crearDenunciaAcoso()
+                else:
+                    denuncia = fabricaAnonima.crearDenunciaMaltrato()
+                
+                denuncia.crearID()
+                nueva_denuncia = denuncia.guardarDenuncia(None,descripcion,denunciado,fecha)
+                denuncia.guardarImagenes(imagenes,nueva_denuncia)
+
+                id_anonimo = denuncia.getID()
 
                 messages.success(request, f'Denuncia enviada, tu ID para la consulta es: {id_anonimo}')
                 return redirect('denuncia')

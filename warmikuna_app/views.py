@@ -7,7 +7,7 @@ from warmikuna_app.sendmail import send_forget_password_mail
 from .forms import RegistroForm
 from django.contrib import messages
 from django.http import HttpResponse
-from .models import Denuncia, Usuario, Imagen
+from .models import Denuncia, Usuario, Imagen, Taller, TallerXUsuario
 import uuid
 
 # Create your views here.
@@ -223,9 +223,29 @@ def consultaDenuncias(request):
             except Exception as e:
                 messages.error(request, 'No existe esa ID de denuncia')
                 return redirect('consulta')
-                print(e)
-
-        return render(request, 'main/consulta.html', context)
-
+            
     else:
-        redirect('ingreso')
+        return redirect('ingreso')
+    
+    return render(request, 'main/consulta.html', context)
+    
+
+def listadoCursos(request):
+    talleres = Taller.objects.all()
+    context = {'talleres': talleres}
+
+    if request.method=="POST":
+        try:
+            user = request.user
+            taller_id = request.POST.get('taller_id')
+            usuario = Usuario.objects.get(user=user)
+            taller = Taller.objects.get(id=taller_id)
+            nueva_inscripcion = TallerXUsuario(user=usuario, taller=taller)
+            nueva_inscripcion.save()
+
+            
+
+        except Exception as e:
+            return redirect('ingreso')
+
+    return render(request, 'main/curso.html', context)

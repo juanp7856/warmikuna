@@ -43,8 +43,11 @@ class Imagen(models.Model):
 
 class Taller(models.Model):
     video = models.URLField(null=True, blank=True)
-    titulo = models.CharField(max_length=40)
+    titulo = models.CharField(max_length=100)
     descripcion = models.CharField(max_length=200)
+
+    def __str__(self):
+        return '{}'.format(self.titulo)
     
 class TallerXUsuario(models.Model):
     user = models.ForeignKey(Usuario, on_delete=models.CASCADE)

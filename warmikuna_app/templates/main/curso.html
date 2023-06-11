@@ -5,15 +5,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
 	<title>Talleres y Cursos</title>
-	<link rel="stylesheet" href="main.css">
-	<!-- PONLO EN EL MAIN CSS
-		.comentario {
-			margin-bottom: 10px;
-			padding: 10px;
-			border: 1px solid #ccc;
-			border-radius: 5px;
-		}
-	--------------->
+	<link rel="stylesheet" href="{% static 'main/main.css' %}">
+		
 	</style>
 </head>
 <body>
@@ -29,9 +22,9 @@
 	<div class="container-menu">
 		<div class="cont-menu">
 			<nav>
-				<a class="link" href="denuncia.html">Realizar denuncia</a>
-				<a class="link" href="curso.html">Cursos y Talleres</a>
-				<a class="link" href="consulta.html">Consultas</a>
+				<a class="link" href="{% url 'denuncia' %}">Realizar denuncia</a>
+				<a class="link" href="{% url 'talleres' %}">Cursos y Talleres</a>
+				<a class="link" href="{% url 'consulta' %}">Consultas</a>
 				<a class="link" href="asesor.html">Asesoramiento del MIMP</a>
 				<a class="link" href="datos.html">Actualizar datos del perfil</a>
 				<a href="#">Lenguaje</a>
@@ -47,20 +40,29 @@
 	</div>
 	<div class="container">
 		<h1>Talleres y Cursos</h1>
-		<div class="videos">
+		{% comment %} <div class="videos">
 			<h2>Videos disponibles:</h2>
 			<ul>
 				<li><a href="video1.mp4">Video 1</a></li>
 				<li><a href="video2.mp4">Video 2</a></li>
 				<li><a href="video3.mp4">Video 3</a></li>
 			</ul>
-		</div>
+		</div> {% endcomment %}
 		<div class="talleres">
 			<h2>Talleres disponibles:</h2>
-			<ul>
-				<li>Taller 1 <button type="button" onclick="inscribirTaller(1)">Inscribirse</button></li>
-				<li>Taller 2 <button type="button" onclick="inscribirTaller(2)">Inscribirse</button></li>
-				<li>Taller 3 <button type="button" onclick="inscribirTaller(3)">Inscribirse</button></li>
+			<ul class="talleres-container">
+				{% for taller in talleres %}
+				<li class="talleres-item">
+					<h2>{{taller.titulo}}</h2>
+					<p><small>{{taller.descripcion}}</small></p>
+					<iframe src="{{taller.video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+					<form method="POST">
+						{% csrf_token %}
+						<input type="hidden" id="taller_id" name="taller_id" value="{{taller.id}}">
+						<button type="submit">Inscribirse al taller</button>
+					</form>
+				</li>
+				{% endfor %}
 			</ul>
 		</div>
 	</div>
@@ -75,7 +77,7 @@
 		</form>
 	</div>
 
-	<script>
+	{% comment %} <script>
 		function inscribirTaller(idTaller) {
 			console.log("Inscripción al taller " + idTaller);
 		}
@@ -94,6 +96,6 @@
 			document.getElementById("contenidoComentario").value = "";
 			return false;
 		}
-	</script>
+	</script> {% endcomment %}
 </body>
 </html>

@@ -14,4 +14,5 @@ urlpatterns = [
     path('password-forgot', views.olvidoContrasena, name="password-forgot"),
     path('password-reset/<token>/', views.reestablecerContrasena, name="password-reset"),
     path('consulta', views.consultaDenuncias, name="consulta"),
+    path('talleres', views.listadoCursos, name="talleres")
 ]

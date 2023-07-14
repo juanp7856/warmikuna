@@ -5,7 +5,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
 	<title>Talleres y Cursos</title>
-	<link rel="stylesheet" href="{% static 'main/main.css' %}">
+	{% if is_colorblind_mode %}
+		<link rel="stylesheet" href="{% static 'main/main_dalt.css' %}">
+	{% else %}
+		<link rel="stylesheet" href="{% static 'main/main.css' %}">
+	{% endif %}
 		
 	</style>
 </head>
@@ -32,7 +36,16 @@
 					<option value="es">Español</option>
 					<option value="en">English</option>
 				</select>
-				<button onclick="cambiarModoDaltonico()">Modo Daltonico</button>
+				<form action="{% url 'toggle-colorblind-mode' %}" method="post">
+					{% csrf_token %}
+					<button type="submit">
+					  {% if is_colorblind_mode %}
+						Quitar modo daltónico
+					  {% else %}
+						Modo daltónico
+					  {% endif %}
+					</button>
+				</form>
 				<a class="link" href="{% url 'salir' %}">Cerrar sesión</a>
 			</nav>
 			<label for="btn-menu">✖️</label>
@@ -52,30 +65,44 @@
 			<h2>Talleres disponibles:</h2>
 			<ul class="talleres-container">
 				{% for taller in talleres %}
+
+				{% if taller.suscrito %}
+				<li class="talleres-item-lg">
+				{% else %}
 				<li class="talleres-item">
+				{% endif %}
+				
 					<h2>{{taller.titulo}}</h2>
 					<p><small>{{taller.descripcion}}</small></p>
 					<iframe src="{{taller.video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-					<form method="POST">
+					<form action="" method="post">
 						{% csrf_token %}
-						<input type="hidden" id="taller_id" name="taller_id" value="{{taller.id}}">
-						<button type="submit">Inscribirse al taller</button>
+						<input type="hidden" name="taller_id" value="{{ taller.id }}">
+						{% if taller.suscrito %}
+							<button type="submit" name="subbutton">Desuscribirse</button>
+						{% else %}
+							<button type="submit" name="subbutton" class="button">Suscribirse</button>
+						{% endif %}
 					</form>
+					{% if taller.suscrito %}
+					<div id="comentarios">
+						<h2>Comentario:</h2>
+						<div id="comentariosLista"></div>
+						<form  method="post">
+							{% csrf_token %}
+							<textarea name="comentario" required placeholder="Escribe tu comentario"></textarea>
+							<input type="hidden" name="taller_id" value="{{ taller.id }}">
+							<button type="submit" name="combutton" class="button">Enviar</button>
+						</form>
+					</div>
+					{% endif %}
 				</li>
 				{% endfor %}
 			</ul>
 		</div>
 	</div>
 	
-	<div id="comentarios">
-		<h2>Comentarios</h2>
-		<div id="comentariosLista"></div>
-		<form id="formComentario" onsubmit="return agregarComentario()">
-			<input id="nombreComentario" required type="text" placeholder="Nombre" maxlength="20">
-			<textarea id="contenidoComentario" required placeholder="Escribe tu comentario"></textarea>
-			<input type="submit" value="Enviar" class="button">
-		</form>
-	</div>
+	
 
 	{% comment %} <script>
 		function inscribirTaller(idTaller) {

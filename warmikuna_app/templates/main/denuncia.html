@@ -6,7 +6,11 @@
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
   	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 	<title>Denunciar</title>
-	<link rel="stylesheet" href="{% static 'main/main.css' %}">
+	{% if is_colorblind_mode %}
+		<link rel="stylesheet" href="{% static 'main/main_dalt.css' %}">
+	{% else %}
+		<link rel="stylesheet" href="{% static 'main/main.css' %}">
+	{% endif %}
 </head>
 <body>
 	<header class="header">
@@ -66,7 +70,7 @@
 		<div class="cont-menu">
 			<nav>
 				<a class="link" href="{% url 'denuncia' %}">Realizar denuncia</a>
-				<a class="link" href="">Cursos y Talleres</a>
+				<a class="link" href="{% url 'talleres' %}">Cursos y Talleres</a>
 				<a class="link" href="{% url 'consulta' %}">Consultas</a>
 				<a class="link" href="">Asesoramiento del MIMP</a>
 				<a class="link" href="">Actualizar datos del perfil</a>
@@ -75,7 +79,16 @@
 					<option value="es">Español</option>
 					<option value="en">English</option>
 				</select>
-				<button onclick="cambiarModoDaltonico()">Modo Daltonico</button>
+				<form action="{% url 'toggle-colorblind-mode' %}" method="post">
+					{% csrf_token %}
+					<button type="submit">
+					  {% if is_colorblind_mode %}
+						Quitar modo daltónico
+					  {% else %}
+						Modo daltónico
+					  {% endif %}
+					</button>
+				</form>
 				<a class="link" href="{% url 'salir' %}">Cerrar sesión</a>
 			</nav>
 			<label for="btn-menu">✖️</label>

@@ -32,9 +32,39 @@ class Denuncia(models.Model):
         ("Maltrato", "Maltrato")
     ]
 
-    user = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True)
+    DEPARTAMENTOS = [
+        ("Lima", "Lima"),
+        ("Arequipa", "Arequipa"),
+        ("Cusco", "Cusco"),
+        ("La Libertad", "La Libertad"),
+        ("Piura", "Piura"),
+        ("Lambayeque", "Lambayeque"),
+        ("Junín", "Junín"),
+        ("Puno", "Puno"),
+        ("Ancash", "Ancash"),
+        ("Ica", "Ica"),
+        ("Tacna", "Tacna"),
+        ("Loreto", "Loreto"),
+        ("Ucayali", "Ucayali"),
+        ("San Martín", "San Martín"),
+        ("Madre de Dios", "Madre de Dios"),
+        ("Amazonas", "Amazonas"),
+        ("Pasco", "Pasco"),
+        ("Huancavelica", "Huancavelica"),
+        ("Ayacucho", "Ayacucho"),
+        ("Tumbes", "Tumbes"),
+        ("Moquegua", "Moquegua"),
+        ("Huánuco", "Huánuco"),
+        ("Apurímac", "Apurímac"),
+        ("Cajamarca", "Cajamarca"),
+        ("Callao", "Callao"),
+        ("Iquitos", "Iquitos"),
+    ]
+
+    user = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True, blank=True)
     descripcion = models.CharField(max_length=500)
     denunciado = models.CharField(max_length=40)
+    departamento = models.CharField(choices=DEPARTAMENTOS, max_length=50, default="Lima")
     fecha = models.DateField(null=True)
     id_anonimo = models.CharField(null=True, blank=True, max_length=100)
     estado = models.CharField(choices=ESTADOS, max_length=20, default="Enviado")
@@ -58,6 +88,7 @@ class Taller(models.Model):
     
 class TallerXUsuario(models.Model):
     user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    comentario = models.CharField(max_length=500, null=True)
     taller = models.ForeignKey(Taller, on_delete=models.CASCADE)
 
 

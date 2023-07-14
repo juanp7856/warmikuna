@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 body{
-    background-color: #866fb3;
+    background-color: rgb(101, 121, 174);
     background-size: 100vw 100vh;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -41,7 +41,7 @@ body{
 .cont-menu{
     width: 100%;
     max-width: 250px;
-    background: #414141;
+    background: rgb(73, 65, 68);
     height: 100vh;
     position: relative;
     transition: all 500ms ease;
@@ -57,13 +57,13 @@ body{
     display: block;
     text-decoration: none;
     padding: 20px;
-    color: #f3e1fe;
+    color: rgb(243, 224, 254);
     border-left: 5px solid transparent;
     transition: all 400ms ease;
 }
 .cont-menu nav a:hover{
-    border-left: 5px solid #f9e4ff;
-    background: #191919;
+    border-left: 5px solid rgb(248, 228, 255);
+    background: rgb(40, 35, 36);
 }
 .cont-menu label{
     position: absolute;
@@ -88,7 +88,7 @@ body{
 }
 h1{
     text-align: center;
-    color: #6b5687;
+    color: rgb(84, 94, 131);
     font-size: 40px;
 }
 input[type="text"], 
@@ -117,34 +117,34 @@ select{
 .icon{
     min-width: 50px;
     text-align: center;
-    color: #999;
+    color: rgb(222, 196, 205);
 }
 .button{
     border: none;
     width: 100%;
     color: white;
     font-size: 20px;
-    background:  #6b5687;
+    background:  rgb(84, 94, 131);
     padding: 15px 20px;
     border-radius: 5px;
     cursor: pointer;
 }
 .button:hover{
-    background: rgb(95, 160, 148);
+    background: rgb(159, 142, 152);
 }
 p{
     text-align: center;
 }
 .link{
     text-decoration: none;
-      color: #6c5787;
+      color: rgb(158, 152, 181);
     font-weight: 600;
 }
 .link:hover{
-     color: #5fa094;
+     color: rgb(159, 142, 152);
 }
 .alerta{
-    background-color: #f08080;
+    background-color: rgb(189, 153, 121);
     border-radius: 0.5rem;
     border: 0.5rem;
     justify-content: center;
@@ -192,7 +192,7 @@ p{
 .comentario {
     margin-bottom: 10px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid rgb(222, 196, 205);
     border-radius: 5px;
 }
 
@@ -246,7 +246,7 @@ p{
 }
 
 .talleres-item button {
-    background-color: rgb(107, 86, 135);
+    background-color: rgb(84, 94, 131);
     padding: 7.5px;
     border-radius: 10px;
     color: white;
@@ -266,7 +266,7 @@ p{
 }
 
 .talleres-item-lg button {
-    background-color: rgb(107, 86, 135);
+    background-color: rgb(84, 94, 131);
     padding: 7.5px;
     border-radius: 10px;
     color: white;

@@ -6,7 +6,11 @@
 	<title>Login</title> 
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-	<link rel="stylesheet" href="{% static 'auth/style_auth.css' %}">
+	{% if is_colorblind %}
+		<link rel="stylesheet" href="{% static 'auth/style_auth_dalt.css' %}">
+	{% else %}
+		<link rel="stylesheet" href="{% static 'auth/style_auth.css' %}">
+	{% endif %}
 </head>
 <body>
 	<form class="formulario" method="POST">

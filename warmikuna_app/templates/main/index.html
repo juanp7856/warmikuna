@@ -5,32 +5,12 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
   	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
-	<title>Inicio</title>
-	<link rel="stylesheet" href="{% static 'main/main.css' %}">
-	<!-- PONLO EN EL MAIN CSS
-		body.daltonico {
-			filter: grayscale(100%);
-		}
-		.daltonico .container-menu a,
-		.daltonico .container-menu label {
-			color: #000;
-		}
-	--------------->
-	<script>
-		function cambiarModoDaltonico() {
-			document.body.classList.toggle('daltonico');
-		}
-		
-		function cambiarIdioma() {
-			var selectIdioma = document.getElementById("selectIdioma");
-			var idiomaSeleccionado = selectIdioma.value;
-			if (idiomaSeleccionado === "es") {
-				window.location.href = "inicio.html";
-			} else if (idiomaSeleccionado === "en") {
-				window.location.href = "home.html";
-			}
-		}
-	</script>
+	<title>Mapa de calor</title>
+	{% if is_colorblind_mode %}
+		<link rel="stylesheet" href="{% static 'main/main_dalt.css' %}">
+	{% else %}
+		<link rel="stylesheet" href="{% static 'main/main.css' %}">
+	{% endif %}
 	
 </head>
 <body>
@@ -39,6 +19,12 @@
 			<div class="btn-menu">
 				<label for="btn-menu">☰ Menú</label>
 			</div>
+			<h1>Mapa de calor</h1>
+			<p>Denuncias por departamento</p>
+			<div class="map-container">
+				{{ mapa_html|safe }}
+			</div>
+			
 		</div>
 	</header>
 	<div class="capa"></div>
@@ -46,9 +32,9 @@
 	<div class="container-menu">
 		<div class="cont-menu">
 			<nav>
-				<a class="link" href="denuncia.html">Realizar denuncia</a>
-				<a class="link" href="curso.html">Cursos y Talleres</a>
-				<a class="link" href="consulta.html">Consultas</a>
+				<a class="link" href="{% url 'denuncia' %}">Realizar denuncia</a>
+				<a class="link" href="{% url 'talleres' %}">Cursos y Talleres</a>
+				<a class="link" href="{% url 'consulta' %}">Consultas</a>
 				<a class="link" href="asesor.html">Asesoramiento del MIMP</a>
 				<a class="link" href="datos.html">Actualizar datos del perfil</a>
 				<a href="#">Lenguaje</a>
@@ -56,7 +42,16 @@
 					<option value="es">Español</option>
 					<option value="en">English</option>
 				</select>
-				<button onclick="cambiarModoDaltonico()">Modo Daltonico</button>
+				<form action="{% url 'toggle-colorblind-mode' %}" method="post">
+					{% csrf_token %}
+					<button type="submit">
+					  {% if is_colorblind_mode %}
+						Quitar modo daltónico
+					  {% else %}
+						Modo daltónico
+					  {% endif %}
+					</button>
+				</form>
 				<a class="link" href="{% url 'salir' %}">Cerrar sesión</a>
 			</nav>
 			<label for="btn-menu">✖️</label>

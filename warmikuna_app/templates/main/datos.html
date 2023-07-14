@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
 	<title>Datos</title>
-	<link rel="stylesheet" href="{% static 'main/main.css' %}">
+	{% if is_colorblind_mode %}
+		<link rel="stylesheet" href="{% static 'main/main_dalt.css' %}">
+	{% else %}
+		<link rel="stylesheet" href="{% static 'main/main.css' %}">
+	{% endif %}
 </head>
 <body>
 	<header class="header">
@@ -50,24 +54,5 @@
 	</header>
 	<div class="capa"></div>
 	<input type="checkbox" id="btn-menu">
-	<div class="container-menu">
-		<div class="cont-menu">
-			<nav>
-				<a class="link" href="denuncia.html">Realizar denuncia</a>
-				<a class="link" href="curso.html">Cursos y Talleres</a>
-				<a class="link" href="consulta.html">Consultas</a>
-				<a class="link" href="asesor.html">Asesoramiento del MIMP</a>
-				<a class="link" href="datos.html">Actualizar datos del perfil</a>
-				<a href="#">Lenguaje</a>
-				<select id="selectIdioma" onchange="cambiarIdioma()">
-					<option value="es">Español</option>
-					<option value="en">English</option>
-				</select>
-				<button onclick="cambiarModoDaltonico()">Modo Daltonico</button>
-				<a class="link" href="{% url 'salir' %}">Cerrar sesión</a>
-			</nav>
-			<label for="btn-menu">✖️</label>
-		</div>
-	</div>
 </body>
 </html>

@@ -12,6 +12,7 @@ Si no tienes pip asegúrate de descargarlo desde [aquí](http://https://pip.pypa
 
 ###### Debes instalar django desde tu consola con: `pip install django`
 ###### Debes instalar pillow desde tu consola con: `pip install pillow`
+###### Debes instalar folium desde tu consola con: `pip install folium`
 
 Luego asegúrate de añadir los scripts de python a tus variables de entorno para que puedas ejecutar django-admin desde cualquier terminal. Puedes seguir este [tutorial](http://https://www.educative.io/answers/how-to-add-python-to-path-variable-in-windows "tutorial").
 

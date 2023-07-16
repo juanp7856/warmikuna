@@ -1,9 +1,10 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>Recuperar Contraseña</title> 
+	<title>{ % trans "Reestablecer Contraseña" % }</title> 
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 	{% if is_colorblind %}
@@ -15,7 +16,7 @@
 <body>
 	<form class="formulario" method="POST">
 		{% csrf_token %}
-		<h1>Reestablecer Contraseña</h1>
+		<h1>{ % trans "Reestablecer Contraseña" % }</h1>
 		<div class="contenedor">
 			<div class="input-contenedor">
 				<i class="fas fa-key icon"></i>
@@ -26,8 +27,8 @@
 				<input required type="password" id="reconfirm_password" name="reconfirm_password" placeholder="Repetir nueva contraseña">
 			</div>
             <input type="hidden" name="user_id" value="{{user_id}}">
-			<button type="submit" class="button">Reestablecer</button>
-			<p><a class="link" href="{% url 'ingreso' %}">Volver al inicio de sesión</a></p>
+			<button type="submit" class="button">{ % trans "Reestablecer" % }</button>
+			<p><a class="link" href="{% url 'ingreso' %}">{ % trans "Volver al inicio de sesión" % }</a></p>
 			{% for message in messages %}
 				<div class="alerta" role="alert">
 					<strong>{{ message }}</strong>

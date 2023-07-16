@@ -1,10 +1,11 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
-	<title>Talleres y Cursos</title>
+	<title>{% trans "Talleres disponibles" %}</title>
 	{% if is_colorblind_mode %}
 		<link rel="stylesheet" href="{% static 'main/main_dalt.css' %}">
 	{% else %}
@@ -17,7 +18,7 @@
 	<header class="header">
 		<div class="container">
 			<div class="btn-menu">
-				<label for="btn-menu">☰ Menú</label>
+				<label for="btn-menu">☰ Menu</label>
 			</div>
 		</div>
 	</header>
@@ -26,33 +27,39 @@
 	<div class="container-menu">
 		<div class="cont-menu">
 			<nav>
-				<a class="link" href="{% url 'generar_mapa' %}">Inicio</a>
-				<a class="link" href="{% url 'denuncia' %}">Realizar denuncia</a>
-				<a class="link" href="{% url 'talleres' %}">Cursos y Talleres</a>
-				<a class="link" href="{% url 'consulta' %}">Consultas</a>
-				<a class="link" href="{% url 'faq' %}">Preguntas frecuentes</a>
-				<a href="#">Lenguaje</a>
-				<select id="selectIdioma" onchange="cambiarIdioma()">
-					<option value="es">Español</option>
-					<option value="en">Quechua</option>
-				</select>
+				<a class="link" href="{% url 'generar_mapa' %}">{% trans "Inicio" %}</a>
+				<a class="link" href="{% url 'denuncia' %}">{% trans "Realizar denuncia" %}</a>
+				<a class="link" href="{% url 'talleres' %}">{% trans "Cursos y Talleres" %}</a>
+				<a class="link" href="{% url 'consulta' %}">{% trans "Consultas" %}</a>
+				<a class="link" href="{% url 'faq' %}">{% trans "Preguntas frecuentes" %}</a>
+				<a href="#">{% trans "Lenguaje" %}</a>
+				<form action="{% url 'cambiar_idioma' %}" method="post">
+					{% csrf_token %}
+					<select name="idioma" onchange="this.form.submit()">
+						<option value="es">Español</option>
+						<option value="qu">Quechua</option>
+					</select>
+					<noscript>
+						<button type="submit">Cambiar idioma</button>
+					</noscript>
+				</form>
 				<form action="{% url 'toggle-colorblind-mode' %}" method="post">
 					{% csrf_token %}
 					<button type="submit">
 					  {% if is_colorblind_mode %}
-						Quitar modo daltónico
+					  	{% trans "Quitar modo daltónico" %}
 					  {% else %}
-						Modo daltónico
+					  	{% trans "Modo daltónico" %}
 					  {% endif %}
 					</button>
 				</form>
-				<a class="link" href="{% url 'salir' %}">Cerrar sesión</a>
+				<a class="link" href="{% url 'salir' %}">{% trans "Cerrar sesión" %}</a>
 			</nav>
 			<label for="btn-menu">✖️</label>
 		</div>
 	</div>
 	<div class="container">
-		<h1>Talleres disponibles</h1>
+		<h1>{% trans "Talleres disponibles" %}</h1>
 		{% comment %} <div class="videos">
 			<h2>Videos disponibles:</h2>
 			<ul>
@@ -78,20 +85,20 @@
 						{% csrf_token %}
 						<input type="hidden" name="taller_id" value="{{ taller.id }}">
 						{% if taller.suscrito %}
-							<button type="submit" name="subbutton">Desuscribirse</button>
+							<button type="submit" name="subbutton">{% trans "Desuscribirse" %}</button>
 						{% else %}
-							<button type="submit" name="subbutton" class="button">Suscribirse</button>
+							<button type="submit" name="subbutton" class="button">{% trans "Suscribirse" %}</button>
 						{% endif %}
 					</form>
 					{% if taller.suscrito %}
 					<div id="comentarios">
-						<h2>Comentario:</h2>
+						<h2>{% trans "Comentario" %}:</h2>
 						<div id="comentariosLista"></div>
 						<form  method="post">
 							{% csrf_token %}
 							<textarea name="comentario" required placeholder="Escribe tu comentario"></textarea>
 							<input type="hidden" name="taller_id" value="{{ taller.id }}">
-							<button type="submit" name="combutton" class="button">Enviar</button>
+							<button type="submit" name="combutton" class="button">{% trans "Enviar" %}</button>
 						</form>
 					</div>
 					{% endif %}
@@ -100,28 +107,5 @@
 			</ul>
 		</div>
 	</div>
-	
-	
-
-	{% comment %} <script>
-		function inscribirTaller(idTaller) {
-			console.log("Inscripción al taller " + idTaller);
-		}
-		function agregarComentario() {
-			var nombre = document.getElementById("nombreComentario").value;
-			var contenido = document.getElementById("contenidoComentario").value;
-
-			var comentario = document.createElement("div");
-			comentario.className = "comentario";
-			comentario.innerHTML = "<h4>" + nombre + "</h4><p>" + contenido + "</p>";
-
-			var comentariosLista = document.getElementById("comentariosLista");
-			comentariosLista.appendChild(comentario);
-
-			document.getElementById("nombreComentario").value = "";
-			document.getElementById("contenidoComentario").value = "";
-			return false;
-		}
-	</script> {% endcomment %}
 </body>
 </html>

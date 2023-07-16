@@ -1,0 +1,310 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-16 11:57-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\warmikuna_app\views.py:43
+msgid "Iniciar sesión"
+msgstr "Yaykuy"
+
+#: .\warmikuna_app\views.py:44
+msgid "No tienes una cuenta"
+msgstr "Mana cuentayuqchu kanki"
+
+#: .\warmikuna_app\views.py:45
+msgid "Regístrate"
+msgstr "Inscribikuy"
+
+#: .\warmikuna_app\views.py:46
+msgid "Olvidaste tu contraseña"
+msgstr "Qonqarqankichu contraseñaykita"
+
+#: .\warmikuna_app\views.py:87
+msgid "Registro"
+msgstr "Hapichiy"
+
+#: .\warmikuna_app\views.py:88
+msgid "Registrate"
+msgstr "Inscribikuy"
+
+#: .\warmikuna_app\views.py:89
+msgid "Ya tienes una cuenta"
+msgstr "Cuentayuqñachu kanki"
+
+#: .\warmikuna_app\views.py:90
+msgid "Iniciar Sesion"
+msgstr "Yaykuy"
+
+#: .\warmikuna_app\views.py:99
+msgid "Denunciar"
+msgstr "Willakuy"
+
+#: .\warmikuna_app\views.py:100
+msgid "Tipo de denuncia"
+msgstr "Tipo de queja nisqa"
+
+#: .\warmikuna_app\views.py:101
+msgid "Con datos"
+msgstr "datos nisqawan"
+
+#: .\warmikuna_app\views.py:102
+msgid "Anónima"
+msgstr "mana riqsisqa"
+
+#: .\warmikuna_app\views.py:103
+msgid "Motivo"
+msgstr "Imarayku"
+
+#: .\warmikuna_app\views.py:104
+msgid "Abuso"
+msgstr "Kamiy"
+
+#: .\warmikuna_app\views.py:105
+msgid "Acoso"
+msgstr "Acoso"
+
+#: .\warmikuna_app\views.py:106
+msgid "Maltrato"
+msgstr "mana allin tratasqa"
+
+#: .\warmikuna_app\views.py:107
+msgid "Regresar"
+msgstr "Kutiy"
+
+#: .\warmikuna_app\views.py:108 .\warmikuna_app\views.py:291
+#: .\warmikuna_app\views.py:315 .\warmikuna_app\views.py:386
+#: .\warmikuna_app\views.py:428 .\warmikuna_app\views.py:457
+msgid "Inicio"
+msgstr "Qallariy"
+
+#: .\warmikuna_app\views.py:109 .\warmikuna_app\views.py:292
+#: .\warmikuna_app\views.py:316 .\warmikuna_app\views.py:387
+#: .\warmikuna_app\views.py:429 .\warmikuna_app\views.py:458
+msgid "Realizar denuncia"
+msgstr "Queja ruway"
+
+#: .\warmikuna_app\views.py:110 .\warmikuna_app\views.py:293
+#: .\warmikuna_app\views.py:317 .\warmikuna_app\views.py:388
+#: .\warmikuna_app\views.py:430 .\warmikuna_app\views.py:459
+msgid "Cursos y Talleres"
+msgstr "Cursokuna hinaspa tallerkuna"
+
+#: .\warmikuna_app\views.py:111 .\warmikuna_app\views.py:294
+#: .\warmikuna_app\views.py:318 .\warmikuna_app\views.py:389
+#: .\warmikuna_app\views.py:431 .\warmikuna_app\views.py:460
+msgid "Consultas"
+msgstr "Cursokuna hinaspa tallerkuna"
+
+#: .\warmikuna_app\views.py:112 .\warmikuna_app\views.py:295
+#: .\warmikuna_app\views.py:319 .\warmikuna_app\views.py:390
+#: .\warmikuna_app\views.py:432 .\warmikuna_app\views.py:446
+#: .\warmikuna_app\views.py:461
+msgid "Preguntas frecuentes"
+msgstr "Sapa kuti tapukuy"
+
+#: .\warmikuna_app\views.py:113 .\warmikuna_app\views.py:296
+#: .\warmikuna_app\views.py:320 .\warmikuna_app\views.py:391
+#: .\warmikuna_app\views.py:433 .\warmikuna_app\views.py:462
+msgid "Lenguaje"
+msgstr "Simi"
+
+#: .\warmikuna_app\views.py:114 .\warmikuna_app\views.py:297
+#: .\warmikuna_app\views.py:321 .\warmikuna_app\views.py:392
+#: .\warmikuna_app\views.py:434 .\warmikuna_app\views.py:463
+msgid "Quitar modo daltónico"
+msgstr "colorblind nisqa modota hurquy"
+
+#: .\warmikuna_app\views.py:115 .\warmikuna_app\views.py:298
+#: .\warmikuna_app\views.py:322 .\warmikuna_app\views.py:393
+#: .\warmikuna_app\views.py:435 .\warmikuna_app\views.py:464
+msgid "Modo daltónico"
+msgstr "Modo colorblind nisqa"
+
+#: .\warmikuna_app\views.py:116 .\warmikuna_app\views.py:299
+#: .\warmikuna_app\views.py:323 .\warmikuna_app\views.py:394
+#: .\warmikuna_app\views.py:436 .\warmikuna_app\views.py:465
+msgid "Cerrar sesión"
+msgstr "Firmakuy"
+
+#: .\warmikuna_app\views.py:173
+msgid "Datos"
+msgstr "Willakuy"
+
+#: .\warmikuna_app\views.py:174
+msgid "Datos personales"
+msgstr "Sapanchasqa willakuy"
+
+#: .\warmikuna_app\views.py:215
+msgid "Recuperar Contraseña"
+msgstr "Contraseña kutichiy"
+
+#: .\warmikuna_app\views.py:216 .\warmikuna_app\views.py:385
+msgid "Enviar"
+msgstr "Apachiy"
+
+#: .\warmikuna_app\views.py:217 .\warmikuna_app\views.py:253
+msgid "Volver al inicio de sesión"
+msgstr "Yaykuyman kutiy"
+
+#: .\warmikuna_app\views.py:251
+msgid "Reestablecer Contraseña"
+msgstr "Yaykuna rimayta kutichiy"
+
+#: .\warmikuna_app\views.py:252
+msgid "Reestablecer"
+msgstr "Kutichiy"
+
+#: .\warmikuna_app\views.py:286 .\warmikuna_app\views.py:310
+msgid "Estado de Denuncia"
+msgstr "Estado de queja nisqa"
+
+#: .\warmikuna_app\views.py:287 .\warmikuna_app\views.py:311
+msgid "Aquí puedes consultar en que estado se encuentran tus denuncias"
+msgstr "Kaypiqa qawawaqmi quejaykikunapa imayna kasqanmanta"
+
+#: .\warmikuna_app\views.py:288 .\warmikuna_app\views.py:312
+msgid "Fecha"
+msgstr "Imay pacha"
+
+#: .\warmikuna_app\views.py:289 .\warmikuna_app\views.py:313
+msgid "Estado"
+msgstr "Imayna kasqan"
+
+#: .\warmikuna_app\views.py:290 .\warmikuna_app\views.py:314
+msgid "Denunciado"
+msgstr "Denunciasqa"
+
+#: .\warmikuna_app\views.py:381
+msgid "Talleres disponibles"
+msgstr "Talleres nisqakuna kasqanmanta"
+
+#: .\warmikuna_app\views.py:382
+msgid "Desuscribirse"
+msgstr "Mana suscribikuychu"
+
+#: .\warmikuna_app\views.py:383
+msgid "Suscribirse"
+msgstr "Suscribikunaykipaq"
+
+#: .\warmikuna_app\views.py:384
+msgid "Comentario"
+msgstr "Rimaykuna"
+
+#: .\warmikuna_app\views.py:426
+msgid "Mapa de calor"
+msgstr "Ruphay mapa"
+
+#: .\warmikuna_app\views.py:427
+msgid "Denuncias por departamento"
+msgstr "Departamento nisqaman hina quejakuna"
+
+#: .\warmikuna_app\views.py:447
+msgid ""
+"¿Cuáles son las acciones que el MIMP está tomando para prevenir y combatir "
+"la violencia de género?"
+msgstr ""
+"¿Ima ruwaykunatataq MIMP ruwachkan warmi-qhari maqanakuy harkananpaq, "
+"atipananpaqpas?"
+
+#: .\warmikuna_app\views.py:448
+msgid ""
+"El MIMP está implementando diversas acciones para prevenir y combatir la "
+"violencia de género. Esto incluye la sensibilización y educación en temas de "
+"igualdad y prevención de la violencia, así como la promoción de normativas y "
+"políticas para proteger a las víctimas y sancionar a los agresores."
+msgstr ""
+"MIMP nisqa imaymana ruwaykunata ruwashan, qhari warmi maqanakuy hark’anapaq, "
+"atipanapaq ima. Kaymi kan, igualdadmanta, violencia harkaymanta ima, "
+"yachaykunata, yachachina ima, chaynallataqmi kamachikuykunata, política "
+"nisqakunatapas kallpanchana, chaynapi ñakariqkunata amachanankupaq hinaspa "
+"agresorkunata muchuchinankupaq."
+
+#: .\warmikuna_app\views.py:449
+msgid ""
+"¿Qué servicios de atención y apoyo brinda el MIMP a las mujeres víctimas de "
+"violencia?"
+msgstr "¿Ima serviciokunatan MIMP qon violenciapi ñak’ariq warmikunaman?"
+
+#: .\warmikuna_app\views.py:450
+msgid ""
+"El MIMP brinda servicios de atención integral a las mujeres víctimas de "
+"violencia a través de los Centros de Emergencia Mujer (CEM) y las Casas de "
+"Acogida. Estos lugares proporcionan asistencia legal, atención psicológica, "
+"asesoría y acompañamiento durante el proceso de recuperación."
+msgstr ""
+"MIMP nisqa tukuy imamanta qhaway serviciokunata qun warmikunaman "
+"Warmikuna Emergencia Wasi (CEM) nisqawan, Wasikunawan ima maqanakuy "
+"Chaskiy. Kay sitiokunapim yanapakunku jurídica, cuidado psicológico, "
+"conseja y acompañamiento chay proceso de recuperación nisqapi."
+
+#: .\warmikuna_app\views.py:451
+msgid ""
+"¿Cómo se puede denunciar casos de violencia contra la mujer? A parte de la "
+"web WARMIKUNA ¿Qué acciones toma el MIMP al recibir una denuncia?"
+msgstr ""
+"¿Imaynatataq willawaq warmikunapa contranpi maqanakuymanta? Aparte de la "
+"Web WARMIKUNA ¿Ima ruwaykunatataq MIMP ruwan queja chaskispa?"
+
+#: .\warmikuna_app\views.py:452
+msgid ""
+"El MIMP cuenta con la Línea 100, donde se pueden realizar denuncias de "
+"violencia contra la mujer de manera confidencial y recibir orientación sobre "
+"los pasos a seguir. Al recibir una denuncia, el MIMP coordina con las "
+"autoridades competentes para brindar la protección necesaria a la víctima y "
+"tomar las acciones legales correspondientes contra el agresor."
+msgstr ""
+"MIMP Línea 100 nisqayuqmi, maypichus quejas de "
+"warmikunapa contranpi maqanakuy pakallapi hinaspa "
+"chay llamkanakuna qatipanapaq. Huk queja chaskispa, MIMP coordinan chay "
+"autoridades competentes nisqakuna, chay víctima nisqaman necesario protección nisqa qonankupaq hinaspa."
+"agresorpa contranpi acciones legales correspondientes nisqakunata ruway."
+
+#: .\warmikuna_app\views.py:453
+msgid ""
+"¿Qué medidas se están implementando para garantizar la seguridad de las "
+"mujeres en espacios públicos?"
+msgstr ""
+"Ima medidakunataq ruwakuchkan seguridad de la "
+"¿warmikuna espacios públicos nisqapi?"
+
+#: .\warmikuna_app\views.py:454
+msgid ""
+"El MIMP está trabajando en la implementación de políticas y programas para "
+"garantizar la seguridad de las mujeres en espacios públicos. Esto incluye la "
+"promoción de entornos seguros, la instalación de sistemas de vigilancia, el "
+"fortalecimiento de la iluminación y la capacitación de personal de seguridad "
+"en enfoques de género."
+msgstr ""
+"MIMP llamk'achkan "
+"espacios públicos nisqapi warmikunaq allin kausayninta qhawarina. Kaypin kashan "
+"mana imamanta manchachikuq pachamamakunata kallpachay, sistemas de vigilancia nisqakuna churay, chay "
+"k'anchayta kallpachay, seguridadpi llamkaqkunata yachachiy "
+"qhari warmi kayninmanta hamutaykunapi."
+
+#: .\warmikuna_app\views.py:456
+msgid ""
+"El MIMP desarrolla diversas campañas de sensibilización y prevención sobre "
+"la violencia de género, como \"Ni una menos\" y \"16 días de activismo "
+"contra la violencia de género\". Además, se promueven programas educativos "
+"en escuelas y comunidades para generar conciencia sobre la importancia de la "
+"igualdad y el respeto."
+msgstr ""
+"MIMP nisqa imaymana concienciacionta, hark'akuy campañakunata ruwan "
+"qhari warmi maqanakuy, ahinataq \"Mana huk pisichu\" hinallataq \"16 p'unchaw activismo "
+"qari warmi maqanakuypa contranpi\". Chaymantapas, programas educativos nisqakunatam kallpanchanku "
+"yachay wasikunapi, ayllukunapipas "
+"igualdad y respeto nisqa."

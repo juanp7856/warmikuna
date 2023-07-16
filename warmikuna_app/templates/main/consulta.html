@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,7 +17,7 @@
 	<header class="header">
 		<div class="container">
 			<div class="btn-menu">
-				<label for="btn-menu">☰ Menú</label>
+				<label for="btn-menu">☰ Menu</label>
 			</div>
 		</div>
 	</header>
@@ -25,27 +26,33 @@
 	<div class="container-menu">
 		<div class="cont-menu">
 			<nav>
-				<a class="link" href="{% url 'generar_mapa' %}">Inicio</a>
-				<a class="link" href="{% url 'denuncia' %}">Realizar denuncia</a>
-				<a class="link" href="{% url 'talleres' %}">Cursos y Talleres</a>
-				<a class="link" href="{% url 'consulta' %}">Consultas</a>
-				<a class="link" href="{% url 'faq' %}">Preguntas frecuentes</a>
-				<a href="#">Lenguaje</a>
-				<select id="selectIdioma" onchange="cambiarIdioma()">
-					<option value="es">Español</option>
-					<option value="en">Quechua</option>
-				</select>
+				<a class="link" href="{% url 'generar_mapa' %}">{% trans "Inicio" %}</a>
+				<a class="link" href="{% url 'denuncia' %}">{% trans "Realizar denuncia" %}</a>
+				<a class="link" href="{% url 'talleres' %}">{% trans "Cursos y Talleres" %}</a>
+				<a class="link" href="{% url 'consulta' %}">{% trans "Consultas" %}</a>
+				<a class="link" href="{% url 'faq' %}">{% trans "Preguntas frecuentes" %}</a>
+				<a href="#">{% trans "Lenguaje" %}</a>
+				<form action="{% url 'cambiar_idioma' %}" method="post">
+					{% csrf_token %}
+					<select name="idioma" onchange="this.form.submit()">
+						<option value="es">Español</option>
+						<option value="qu">Quechua</option>
+					</select>
+					<noscript>
+						<button type="submit">Cambiar idioma</button>
+					</noscript>
+				</form>
 				<form action="{% url 'toggle-colorblind-mode' %}" method="post">
 					{% csrf_token %}
 					<button type="submit">
 					  {% if is_colorblind_mode %}
-						Quitar modo daltónico
+					  	{% trans "Quitar modo daltónico" %}
 					  {% else %}
-						Modo daltónico
+					  	{% trans "Modo daltónico" %}
 					  {% endif %}
 					</button>
 				</form>
-				<a class="link" href="{% url 'salir' %}">Cerrar sesión</a>
+				<a class="link" href="{% url 'salir' %}">{% trans "Cerrar sesión" %}</a>
 			</nav>
 			<label for="btn-menu">✖️</label>
 		</div>
@@ -53,14 +60,14 @@
 
 	<main class="main">
 		<div class="container">
-			<h1>Estado de Denuncia</h1>
-			<p>Aquí puedes consultar en que estado se encuentran tus denuncias:</p>
+			<h1>{ % trans "Estado de Denuncia" % }</h1>
+			<p>{ % trans "Aquí puedes consultar en que estado se encuentran tus denuncias:" % }</p>
 			<div class="wrap-tarjetas">
 				{% for denuncia in denuncias %}
 					<div class="tarjeta-consulta">
 						<p><span></span>{{denuncia.denunciado}}</p>
-						<p><span>Fecha: </span>{{denuncia.fecha}}</p>
-						<p><span>Estado: </span>{{denuncia.estado}}</p>
+						<p><span>{ % trans "Fecha" % }:</span>{{denuncia.fecha}}</p>
+						<p><span>{ % trans "Estado" % }:</span>{{denuncia.estado}}</p>
 					</div>
 				{% endfor %}
 			</div>
@@ -86,9 +93,9 @@
 			<div class="wrap-tarjetas">
 				{% if denunciabuscada %}
 				<div class="tarjeta-consulta">
-					<p><span>Denunciado: </span>{{denunciabuscada.denunciado}}</p>
-					<p><span>Fecha: </span>{{denunciabuscada.fecha}}</p>
-					<p><span>Estado: </span>{{denunciabuscada.estado}}</p>
+					<p><span>{ % trans "Denunciado" % }:</span>{{denunciabuscada.denunciado}}</p>
+					<p><span>{ % trans "Fecha" % }:</span>{{denunciabuscada.fecha}}</p>
+					<p><span>{ % trans "Estado" % }:</span>{{denunciabuscada.estado}}</p>
 				</div>
 				{% endif %}
 			</div>

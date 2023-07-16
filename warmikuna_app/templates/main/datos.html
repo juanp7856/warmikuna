@@ -1,11 +1,12 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
-	<title>Datos</title>
+	<title>{% trans "Datos" %}</title>
 	{% if is_colorblind_mode %}
 		<link rel="stylesheet" href="{% static 'main/main_dalt.css' %}">
 	{% else %}
@@ -20,7 +21,7 @@
 			</div>
 			<form class="formulario" method="POST">
 				{% csrf_token %}
-				<h1>Datos personales</h1>
+				<h1>{% trans "Datos personales" %}</h1>
 				<div class="contenedor">
 					<div class="input-contenedor">
 						<i class="fas fa-user icon"></i>

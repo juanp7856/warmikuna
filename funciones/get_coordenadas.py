@@ -29,3 +29,4 @@ def get_coordenadas(departamento):
         'Iquitos': [-3.743673, -73.251317]
     }
     return coordenadas.get(departamento, [0, 0])
+

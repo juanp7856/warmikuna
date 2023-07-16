@@ -1,11 +1,12 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
-	<title>Inicio</title>
+	<title>{% trans "Preguntas frecuentes" %}</title>
 	{% if is_colorblind_mode %}
 		<link rel="stylesheet" href="{% static 'main/main_dalt.css' %}">
 	{% else %}
@@ -18,32 +19,27 @@
 			<div class="btn-menu">
 				<label for="btn-menu">☰ Menú</label>
 			</div>
-			<h1>Preguntas frecuentes</h1>
+			<h1>{% trans "Preguntas frecuentes" %}</h1>
 			<div class="panel-preguntas">
-				<h3>¿Cuáles son las acciones que el MIMP está tomando para prevenir y combatir la violencia de género?</h3>
+				<h3>{% trans "¿Cuáles son las acciones que el MIMP está tomando para prevenir y combatir la violencia de género?" %}</h3>
 				<div class="panel-rpta">
-					<p>El MIMP está implementando diversas acciones para prevenir y combatir la violencia de género. Esto incluye la sensibilización y educación en temas de igualdad y prevención de la violencia, 
-						así como la promoción de normativas y políticas para proteger a las víctimas y sancionar a los agresores.</p>
+					<p>{% trans "El MIMP está implementando diversas acciones para prevenir y combatir la violencia de género. Esto incluye la sensibilización y educación en temas de igualdad y prevención de la violencia, así como la promoción de normativas y políticas para proteger a las víctimas y sancionar a los agresores." %}</p>
 				</div>
-				<h3>¿Qué servicios de atención y apoyo brinda el MIMP a las mujeres víctimas de violencia?</h3>
+				<h3>{% trans "¿Qué servicios de atención y apoyo brinda el MIMP a las mujeres víctimas de violencia?" %}</h3>
 				<div class="panel-rpta">
-					<p>El MIMP brinda servicios de atención integral a las mujeres víctimas de violencia a través de los Centros de Emergencia Mujer (CEM) y las Casas de Acogida. 
-						Estos lugares proporcionan asistencia legal, atención psicológica, asesoría y acompañamiento durante el proceso de recuperación.</p>
+					<p>{% trans "El MIMP brinda servicios de atención integral a las mujeres víctimas de violencia a través de los Centros de Emergencia Mujer (CEM) y las Casas de Acogida. Estos lugares proporcionan asistencia legal, atención psicológica, asesoría y acompañamiento durante el proceso de recuperación." %}</p>
 				</div>	
-				<h3>¿Cómo se puede denunciar casos de violencia contra la mujer? A parte de la web WARMIKUNA ¿Qué acciones toma el MIMP al recibir una denuncia?</h3>
+				<h3>{% trans "¿Cómo se puede denunciar casos de violencia contra la mujer? A parte de la web WARMIKUNA ¿Qué acciones toma el MIMP al recibir una denuncia?" %}</h3>
 				<div class="panel-rpta">
-					<p>El MIMP cuenta con la Línea 100, donde se pueden realizar denuncias de violencia contra la mujer de manera confidencial y recibir orientación sobre los pasos a seguir. 
-						Al recibir una denuncia, el MIMP coordina con las autoridades competentes para brindar la protección necesaria a la víctima y tomar las acciones legales correspondientes contra el agresor.</p>
+					<p>{% trans "El MIMP cuenta con la Línea 100, donde se pueden realizar denuncias de violencia contra la mujer de manera confidencial y recibir orientación sobre los pasos a seguir. Al recibir una denuncia, el MIMP coordina con las autoridades competentes para brindar la protección necesaria a la víctima y tomar las acciones legales correspondientes contra el agresor." %}</p>
 				</div>
-				<h3>¿Qué medidas se están implementando para garantizar la seguridad de las mujeres en espacios públicos?</h3>
+				<h3>{% trans "¿Qué medidas se están implementando para garantizar la seguridad de las mujeres en espacios públicos?" %}</h3>
 				<div class="panel-rpta">
-					<p>El MIMP está trabajando en la implementación de políticas y programas para garantizar la seguridad de las mujeres en espacios públicos. 
-						Esto incluye la promoción de entornos seguros, la instalación de sistemas de vigilancia, el fortalecimiento de la iluminación y la capacitación de personal de seguridad en enfoques de género.</p>
+					<p>{% trans "El MIMP está trabajando en la implementación de políticas y programas para garantizar la seguridad de las mujeres en espacios públicos. Esto incluye la promoción de entornos seguros, la instalación de sistemas de vigilancia, el fortalecimiento de la iluminación y la capacitación de personal de seguridad en enfoques de género." %}</p>
 				</div>
-				<h3>¿Qué programas y campañas se están llevando a cabo para concientizar sobre la violencia de género?</h3>
+				<h3>{% trans "¿Qué programas y campañas se están llevando a cabo para concientizar sobre la violencia de género?" %}</h3>
 				<div class="panel-rpta">
-					<p>El MIMP desarrolla diversas campañas de sensibilización y prevención sobre la violencia de género, como "Ni una menos" y "16 días de activismo contra la violencia de género". 
-						Además, se promueven programas educativos en escuelas y comunidades para generar conciencia sobre la importancia de la igualdad y el respeto.</p>
+					<p>{% trans "El MIMP desarrolla diversas campañas de sensibilización y prevención sobre la violencia de género, como "Ni una menos" y "16 días de activismo contra la violencia de género". Además, se promueven programas educativos en escuelas y comunidades para generar conciencia sobre la importancia de la igualdad y el respeto." %}</p>
 				</div>
 			</div>
 		</div>
@@ -53,27 +49,33 @@
 	<div class="container-menu">
 		<div class="cont-menu">
 			<nav>
-				<a class="link" href="{% url 'generar_mapa' %}">Inicio</a>
-				<a class="link" href="{% url 'denuncia' %}">Realizar denuncia</a>
-				<a class="link" href="{% url 'talleres' %}">Cursos y Talleres</a>
-				<a class="link" href="{% url 'consulta' %}">Consultas</a>
-				<a class="link" href="{% url 'faq' %}">Preguntas frecuentes</a>
-				<a href="#">Lenguaje</a>
-				<select id="selectIdioma" onchange="cambiarIdioma()">
-					<option value="es">Español</option>
-					<option value="en">Quechua</option>
-				</select>
+				<a class="link" href="{% url 'generar_mapa' %}">{% trans "Inicio" %}</a>
+				<a class="link" href="{% url 'denuncia' %}">{% trans "Realizar denuncia" %}</a>
+				<a class="link" href="{% url 'talleres' %}">{% trans "Cursos y Talleres" %}</a>
+				<a class="link" href="{% url 'consulta' %}">{% trans "Consultas" %}</a>
+				<a class="link" href="{% url 'faq' %}">{% trans "Preguntas frecuentes" %}</a>
+				<a href="#">{% trans "Lenguaje" %}</a>
+				<form action="{% url 'cambiar_idioma' %}" method="post">
+					{% csrf_token %}
+					<select name="idioma" onchange="this.form.submit()">
+						<option value="es">Español</option>
+						<option value="qu">Quechua</option>
+					</select>
+					<noscript>
+						<button type="submit">Cambiar idioma</button>
+					</noscript>
+				</form>
 				<form action="{% url 'toggle-colorblind-mode' %}" method="post">
 					{% csrf_token %}
 					<button type="submit">
 					  {% if is_colorblind_mode %}
-						Quitar modo daltónico
+					  	{% trans "Quitar modo daltónico" %}
 					  {% else %}
-						Modo daltónico
+					  	{% trans "Modo daltónico" %}
 					  {% endif %}
 					</button>
 				</form>
-				<a class="link" href="{% url 'salir' %}">Cerrar sesión</a>
+				<a class="link" href="{% url 'salir' %}">{% trans "Cerrar sesión" %}</a>
 			</nav>
 			<label for="btn-menu">✖️</label>
 		</div>

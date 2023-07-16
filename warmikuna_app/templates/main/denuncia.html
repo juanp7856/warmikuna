@@ -1,11 +1,12 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
   	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-	<title>Denunciar</title>
+	<title>{% trans "Denunciar" %}</title>
 	{% if is_colorblind_mode %}
 		<link rel="stylesheet" href="{% static 'main/main_dalt.css' %}">
 	{% else %}
@@ -20,22 +21,22 @@
 			</div>
 			<form class="formulario" method="POST" enctype="multipart/form-data">
 				{% csrf_token %}
-				<h1>Denunciar</h1>
+				<h1>{% trans "Denunciar" %}</h1>
 				<div class="contenedor">
-					<p class="tipo">Tipo de denuncia</p>
+					<p class="tipo">{% trans "Tipo de denuncia" %}</p>
 					<i class="fas fa-user icon"></i>
 					<select required name="tipo" id="tipo">
-						<option value="1">Con datos</option>
-						<option value="2">Anónima</option>
+						<option value="1">{% trans "Con datos" %}</option>
+						<option value="2">{% trans "Anónima" %}</option>
 					</select>
 				</div>
 				<div class="contenedor">
-					<p class="tipo">Motivo</p>
+					<p class="tipo">{ % trans "Motivo" % }</p>
 					<i class="fas fa-users icon"></i>
 					<select required name="motivo" id="motivo">
-						<option value="1">Abuso</option>
-						<option value="2">Acoso</option>
-						<option value="3">Maltrato</option>
+						<option value="1">{% trans "Abuso" %}</option>
+						<option value="2">{% trans "Acoso" %}</option>
+						<option value="3">{% trans "Maltrato" %}</option>
 					</select>
 				</div>
 				<div class="input-contenedor">
@@ -60,7 +61,7 @@
 					</div>
 					{% endfor %}
 				<input type="submit" value="Enviar" class="button">
-				<p><a class="link" href="">Regresar</a></p>
+				<p><a class="link" href="">{% trans "Regresar" %}</a></p>
 			</form>
 		</div>
 	</header>
@@ -69,27 +70,33 @@
 	<div class="container-menu">
 		<div class="cont-menu">
 			<nav>
-				<a class="link" href="{% url 'generar_mapa' %}">Inicio</a>
-				<a class="link" href="{% url 'denuncia' %}">Realizar denuncia</a>
-				<a class="link" href="{% url 'talleres' %}">Cursos y Talleres</a>
-				<a class="link" href="{% url 'consulta' %}">Consultas</a>
-				<a class="link" href="{% url 'faq' %}">Preguntas frecuentes</a>
-				<a href="#">Lenguaje</a>
-				<select id="selectIdioma" onchange="cambiarIdioma()">
-					<option value="es">Español</option>
-					<option value="en">Quechua</option>
-				</select>
+				<a class="link" href="{% url 'generar_mapa' %}">{% trans "Inicio" %}</a>
+				<a class="link" href="{% url 'denuncia' %}">{% trans "Realizar denuncia" %}</a>
+				<a class="link" href="{% url 'talleres' %}">{% trans "Cursos y Talleres" %}</a>
+				<a class="link" href="{% url 'consulta' %}">{% trans "Consultas" %}</a>
+				<a class="link" href="{% url 'faq' %}">{% trans "Preguntas frecuentes" %}</a>
+				<a href="#">{% trans "Lenguaje" %}</a>
+				<form action="{% url 'cambiar_idioma' %}" method="post">
+					{% csrf_token %}
+					<select name="idioma" onchange="this.form.submit()">
+						<option value="es">Español</option>
+						<option value="qu">Quechua</option>
+					</select>
+					<noscript>
+						<button type="submit">Cambiar idioma</button>
+					</noscript>
+				</form>
 				<form action="{% url 'toggle-colorblind-mode' %}" method="post">
 					{% csrf_token %}
 					<button type="submit">
 					  {% if is_colorblind_mode %}
-						Quitar modo daltónico
+					  	{% trans "Quitar modo daltónico" %}
 					  {% else %}
-						Modo daltónico
+					  	{% trans "Modo daltónico" %}
 					  {% endif %}
 					</button>
 				</form>
-				<a class="link" href="{% url 'salir' %}">Cerrar sesión</a>
+				<a class="link" href="{% url 'salir' %}">{% trans "Cerrar sesión" %}</a>
 			</nav>
 			<label for="btn-menu">✖️</label>
 		</div>

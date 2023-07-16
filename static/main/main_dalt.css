@@ -88,9 +88,14 @@ body{
 }
 h1{
     text-align: center;
-    color: rgb(84, 94, 131);
+    color: white;
     font-size: 40px;
 }
+
+.formulario h1 {
+    color: black;
+}
+
 input[type="text"], 
 input[type="date"] , 
 input[type="tel"], input[type="number"]
@@ -279,4 +284,27 @@ p{
     height: 60%;
     padding-top: 40px;
     margin: 0 auto;
+}
+
+.panel-preguntas {
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 90%;
+    background-color: white;
+    padding: 50px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.panel-rpta {
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgb(84, 94, 131);;
+}
+
+.panel-rpta p {
+    text-align: start;
+    color: white;
 }

@@ -25,15 +25,15 @@
 	<div class="container-menu">
 		<div class="cont-menu">
 			<nav>
+				<a class="link" href="{% url 'generar_mapa' %}">Inicio</a>
 				<a class="link" href="{% url 'denuncia' %}">Realizar denuncia</a>
 				<a class="link" href="{% url 'talleres' %}">Cursos y Talleres</a>
 				<a class="link" href="{% url 'consulta' %}">Consultas</a>
-				<a class="link" href="asesor.html">Asesoramiento del MIMP</a>
-				<a class="link" href="datos.html">Actualizar datos del perfil</a>
+				<a class="link" href="{% url 'faq' %}">Preguntas frecuentes</a>
 				<a href="#">Lenguaje</a>
 				<select id="selectIdioma" onchange="cambiarIdioma()">
 					<option value="es">Español</option>
-					<option value="en">English</option>
+					<option value="en">Quechua</option>
 				</select>
 				<form action="{% url 'toggle-colorblind-mode' %}" method="post">
 					{% csrf_token %}
@@ -58,7 +58,7 @@
 			<div class="wrap-tarjetas">
 				{% for denuncia in denuncias %}
 					<div class="tarjeta-consulta">
-						<p><span>Denunciado: </span>{{denuncia.denunciado}}</p>
+						<p><span></span>{{denuncia.denunciado}}</p>
 						<p><span>Fecha: </span>{{denuncia.fecha}}</p>
 						<p><span>Estado: </span>{{denuncia.estado}}</p>
 					</div>

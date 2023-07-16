@@ -1,5 +1,5 @@
 def get_coordenadas(departamento):
-    # Obtener las coordenadas de cada departamento (puedes definirlas en un diccionario)
+    
     coordenadas = {
         'Lima': [-12.046374, -77.042793],
         'Arequipa': [-16.409047, -71.537450],

@@ -4,6 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 import folium
 from funciones.get_coordenadas import get_coordenadas
+from funciones.val_datos import valdatos
+from funciones.val_reset import valreset
 from patron_diseno.fabricaabstracta.fabricaAbstractaDenunciaAnonimo import FabricaDenunciaAnonima
 from patron_diseno.fabricaabstracta.fabricaAbstractaDenunciaDatos import FabricaDenunciaDatos
 from warmikuna_app.sendmail import send_forget_password_mail
@@ -138,19 +140,12 @@ def ingresar_datos(request):
                 apellido = request.POST.get("apellido")
                 numero = request.POST.get("numero")
                 fnacim = request.POST.get("fnacim")
-
-                if len(dni) != 8:
-                    messages.error(request, "El DNI es incorrecto")
+                
+                error = valdatos(dni, nombre, apellido,numero)
+                if(error != ""):
+                    messages.error(request, error)
                     return redirect('datos')
-                elif any(i.isnumeric() for i in nombre):
-                    messages.error(request, "Nombre contiene números")
-                    return redirect('datos')
-                elif any(i.isnumeric() for i in apellido):
-                    messages.error(request, "Apellido contiene números")
-                    return redirect('datos')
-                elif len(numero) != 9:
-                    messages.error(request, "Número contiene menos de 9 dígitos")
-                    return redirect('datos')
+                
                 usuario = Usuario.objects.get(user=user)
                 usuario.dni = dni
                 usuario.nombre = nombre
@@ -183,7 +178,9 @@ def olvidoContrasena(request):
             usuario_obj= Usuario.objects.get(user = user_obj)
             usuario_obj.passwordResetToken = token
             usuario_obj.save()
+
             send_forget_password_mail(user_obj.username , token)
+
             messages.success(request, 'Se envió el correo.')
             return redirect('password-forgot')
     
@@ -203,14 +200,12 @@ def reestablecerContrasena(request, token):
             confirm_password = request.POST.get('reconfirm_password')
             user_id = request.POST.get('user_id')
             
-            if user_id is  None:
-                messages.success(request, 'No se encontró id de usuario.')
+            error = valreset(user_id, new_password, confirm_password)
+
+            if(error != ""):
+                messages.error(request, error)
                 return redirect(f'password-reset/{token}/')
-            
-            if  new_password != confirm_password:
-                messages.success(request, 'Contraseñas no coinciden.')
-                return redirect(f'password-reset/{token}/')
-            
+
             user_obj = User.objects.get(id = user_id)
             user_obj.set_password(new_password)
             user_obj.save()
@@ -294,7 +289,6 @@ def listadoCursos(request):
 
 
 def toggle_colorblind_mode(request):
-    print("toggle")
     if 'colorblind_mode' in request.session:
         del request.session['colorblind_mode']
     else:
@@ -319,3 +313,8 @@ def generar_mapa(request):
 
     mapa_html = peru_map._repr_html_()
     return render(request, 'main/index.html', {'mapa_html': mapa_html, 'is_colorblind_mode': is_colorblind})
+
+def faq(request):
+    is_colorblind = request.session.get('colorblind_mode', False)
+
+    return render(request, 'main/faq.html', {'is_colorblind_mode': is_colorblind})

@@ -26,15 +26,15 @@
 	<div class="container-menu">
 		<div class="cont-menu">
 			<nav>
+				<a class="link" href="{% url 'generar_mapa' %}">Inicio</a>
 				<a class="link" href="{% url 'denuncia' %}">Realizar denuncia</a>
 				<a class="link" href="{% url 'talleres' %}">Cursos y Talleres</a>
 				<a class="link" href="{% url 'consulta' %}">Consultas</a>
-				<a class="link" href="asesor.html">Asesoramiento del MIMP</a>
-				<a class="link" href="datos.html">Actualizar datos del perfil</a>
+				<a class="link" href="{% url 'faq' %}">Preguntas frecuentes</a>
 				<a href="#">Lenguaje</a>
 				<select id="selectIdioma" onchange="cambiarIdioma()">
 					<option value="es">Español</option>
-					<option value="en">English</option>
+					<option value="en">Quechua</option>
 				</select>
 				<form action="{% url 'toggle-colorblind-mode' %}" method="post">
 					{% csrf_token %}
@@ -52,7 +52,7 @@
 		</div>
 	</div>
 	<div class="container">
-		<h1>Talleres y Cursos</h1>
+		<h1>Talleres disponibles</h1>
 		{% comment %} <div class="videos">
 			<h2>Videos disponibles:</h2>
 			<ul>
@@ -62,7 +62,6 @@
 			</ul>
 		</div> {% endcomment %}
 		<div class="talleres">
-			<h2>Talleres disponibles:</h2>
 			<ul class="talleres-container">
 				{% for taller in talleres %}
 

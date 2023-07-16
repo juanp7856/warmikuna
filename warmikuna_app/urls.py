@@ -16,5 +16,6 @@ urlpatterns = [
     path('password-reset/<token>/', views.reestablecerContrasena, name="password-reset"),
     path('consulta', views.consultaDenuncias, name="consulta"),
     path('talleres', views.listadoCursos, name="talleres"),
-    path('toggle-colorblind-mode', views.toggle_colorblind_mode, name='toggle-colorblind-mode')
+    path('toggle-colorblind-mode', views.toggle_colorblind_mode, name='toggle-colorblind-mode'),
+    path('faq', views.faq, name="faq")
 ]

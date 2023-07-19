@@ -16,6 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: .\warmikuna_app\templates\auth\ingreso.html:7
 #: .\warmikuna_app\templates\auth\ingreso.html:19
@@ -358,7 +359,7 @@ msgstr ""
 
 #: .\warmikuna_app\views.py:100
 msgid "Texto a traducir"
-msgstr "Hola en quechua"
+msgstr "Hola en inglés"
 
 #: .\warmikuna_app\views.py:295 .\warmikuna_app\views.py:319
 msgid "Aquí puedes consultar en que estado se encuentran tus denuncias"

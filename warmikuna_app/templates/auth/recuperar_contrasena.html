@@ -4,7 +4,7 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>{ % trans "Recuperar Contraseña" % }</title> 
+	<title>{% trans "Recuperar Contraseña" %}</title> 
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 	{% if is_colorblind %}
@@ -16,14 +16,14 @@
 <body>
 	<form class="formulario" method="POST">
 		{% csrf_token %}
-		<h1>{ % trans "Recuperar Contraseña" % }</h1>
+		<h1>{% trans "Recuperar Contraseña" %}</h1>
 		<div class="contenedor">
 			<div class="input-contenedor">
 				<i class="fas fa-envelope icon"></i>
 				<input required type="text" id="username" name="username" placeholder="Correo Electrónico">
 			</div>
-			<button type="submit" class="button">{ % trans "Enviar" % }</button>
-			<p><a class="link" href="{% url 'ingreso' %}">{ % trans "Volver al inicio de sesión" % }</a></p>
+			<button type="submit" class="button">{% trans "Enviar" %}</button>
+			<p><a class="link" href="{% url 'ingreso' %}">{% trans "Volver al inicio de sesión" %}</a></p>
 			{% for message in messages %}
 				<div class="alerta" role="alert">
 					<strong>{{ message }}</strong>

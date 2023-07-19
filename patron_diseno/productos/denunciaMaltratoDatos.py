@@ -7,8 +7,8 @@ class denunciaMaltratoDatos(denunciaMaltrato):
     def __init__(self):
         super().__init__()
 
-    def guardarDenuncia(self, user, descripcion, denunciado, fecha):
-        denuncia = Denuncia(user=user,descripcion=descripcion,denunciado=denunciado,fecha=fecha,motivo=self.motivo)
+    def guardarDenuncia(self, user, descripcion, denunciado, fecha,departamento):
+        denuncia = Denuncia(user=user,descripcion=descripcion,denunciado=denunciado,fecha=fecha,motivo=self.motivo,departamento=departamento)
         denuncia.save()
 
         return denuncia

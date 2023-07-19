@@ -14,8 +14,8 @@ class denunciaAbusoAnonimo(denunciaAbuso):
     def getID(self):
         return self.id_anonimo
 
-    def guardarDenuncia(self, user, descripcion, denunciado, fecha):
-        denuncia = Denuncia(descripcion=descripcion,denunciado=denunciado,fecha=fecha,motivo=self.motivo, id_anonimo=self.id_anonimo)
+    def guardarDenuncia(self, user, descripcion, denunciado, fecha,departamento):
+        denuncia = Denuncia(descripcion=descripcion,denunciado=denunciado,fecha=fecha,motivo=self.motivo, id_anonimo=self.id_anonimo,departamento=departamento)
         denuncia.save()
 
         return denuncia

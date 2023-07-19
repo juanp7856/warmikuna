@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 import folium
 from funciones.get_coordenadas import get_coordenadas
+from funciones.get_dep import get_dep
 from funciones.val_datos import valdatos
 from funciones.val_reset import valreset
 from patron_diseno.fabricaabstracta.fabricaAbstractaDenunciaAnonimo import FabricaDenunciaAnonima
@@ -18,8 +19,8 @@ from .models import Denuncia, Usuario, Imagen, Taller, TallerXUsuario
 import uuid
 from django.db.models import Count
 from folium.plugins import HeatMap
-from django.utils.translation import gettext as _
-from django.utils import translation
+from django.utils.translation import gettext_lazy as _
+from django.utils.translation import activate, get_language
 
 # Create your views here.
 def ingreso(request):
@@ -96,6 +97,7 @@ def registro(request):
 
 def denuncia(request):
     is_colorblind = request.session.get('colorblind_mode', False)
+    print(_("Texto a traducir"))
 
     context = {
         'is_colorblind_mode': is_colorblind,
@@ -125,7 +127,10 @@ def denuncia(request):
             denunciado = request.POST.get("denunciado")
             descripcion = request.POST.get("descripcion")
             imagenes = request.FILES.getlist('evidencia')
-            motivo = request.FILES.get("motivo")
+            motivo = request.POST.get("motivo")
+            id = request.POST.get("departamento")
+            departamento = get_dep(id)
+
             
             if request.POST.get("tipo")=="1":
                 user = Usuario.objects.get(user=request.user)
@@ -139,7 +144,7 @@ def denuncia(request):
                 else:
                     denuncia = fabricaDatos.crearDenunciaMaltrato()
 
-                nueva_denuncia = denuncia.guardarDenuncia(user,descripcion,denunciado,fecha)
+                nueva_denuncia = denuncia.guardarDenuncia(user,descripcion,denunciado,fecha,departamento)
                 denuncia.guardarImagenes(imagenes,nueva_denuncia)
 
                 messages.success(request, 'Denuncia enviada')
@@ -156,7 +161,7 @@ def denuncia(request):
                     denuncia = fabricaAnonima.crearDenunciaMaltrato()
                 
                 denuncia.crearID()
-                nueva_denuncia = denuncia.guardarDenuncia(None,descripcion,denunciado,fecha)
+                nueva_denuncia = denuncia.guardarDenuncia(None,descripcion,denunciado,fecha,departamento)
                 denuncia.guardarImagenes(imagenes,nueva_denuncia)
 
                 id_anonimo = denuncia.getID()
@@ -457,7 +462,7 @@ def faq(request):
         '¿Qué medidas se están implementando para garantizar la seguridad de las mujeres en espacios públicos?': _('¿Qué medidas se están implementando para garantizar la seguridad de las mujeres en espacios públicos?'),
         'El MIMP está trabajando en la implementación de políticas y programas para garantizar la seguridad de las mujeres en espacios públicos. Esto incluye la promoción de entornos seguros, la instalación de sistemas de vigilancia, el fortalecimiento de la iluminación y la capacitación de personal de seguridad en enfoques de género.': _('El MIMP está trabajando en la implementación de políticas y programas para garantizar la seguridad de las mujeres en espacios públicos. Esto incluye la promoción de entornos seguros, la instalación de sistemas de vigilancia, el fortalecimiento de la iluminación y la capacitación de personal de seguridad en enfoques de género.'),
         '¿Qué programas y campañas se están llevando a cabo para concientizar sobre la violencia de género?': '¿Qué programas y campañas se están llevando a cabo para concientizar sobre la violencia de género?',
-        'El MIMP desarrolla diversas campañas de sensibilización y prevención sobre la violencia de género, como "Ni una menos" y "16 días de activismo contra la violencia de género". Además, se promueven programas educativos en escuelas y comunidades para generar conciencia sobre la importancia de la igualdad y el respeto.': _('El MIMP desarrolla diversas campañas de sensibilización y prevención sobre la violencia de género, como "Ni una menos" y "16 días de activismo contra la violencia de género". Además, se promueven programas educativos en escuelas y comunidades para generar conciencia sobre la importancia de la igualdad y el respeto.'),
+        'El MIMP desarrolla diversas campañas de sensibilización y prevención sobre la violencia de género, como Ni una menos y 16 días de activismo contra la violencia de género. Además, se promueven programas educativos en escuelas y comunidades para generar conciencia sobre la importancia de la igualdad y el respeto.': _('El MIMP desarrolla diversas campañas de sensibilización y prevención sobre la violencia de género, como Ni una menos y 16 días de activismo contra la violencia de género. Además, se promueven programas educativos en escuelas y comunidades para generar conciencia sobre la importancia de la igualdad y el respeto.'),
         'Inicio': _('Inicio'),
         'Realizar denuncia': _('Realizar denuncia'),
         'Cursos y Talleres': _('Cursos y Talleres'),
@@ -471,11 +476,21 @@ def faq(request):
 
     return render(request, 'main/faq.html', context)
 
+# def cambiar_idioma(request):
+#     if request.method == "POST":
+#         nuevo_idioma = request.POST.get('idioma')
+
+#         del request.session[settings.LANGUAGE_SESSION_KEY]
+
+#         # translation.activate(nuevo_idioma)
+#         # request.session[settings.LANGUAGE_SESSION_KEY] = nuevo_idioma
+
+#     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
 def cambiar_idioma(request):
-    if request.method == "POST":
-        nuevo_idioma = request.POST.get('idioma')
-
-        translation.activate(nuevo_idioma)
-        request.session[settings.LANGUAGE_SESSION_KEY] = nuevo_idioma
-
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    if request.method == 'POST':
+        idioma = request.POST.get('idioma')
+        if idioma in [lang_code for lang_code, _ in settings.LANGUAGES]:
+            request.session[settings.LANGUAGE_SESSION_KEY] = idioma
+            activate(idioma)
+    return redirect(request.META.get('HTTP_REFERER', '/'))

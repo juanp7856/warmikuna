@@ -23,7 +23,7 @@
 				{% csrf_token %}
 				<h1>{% trans "Denunciar" %}</h1>
 				<div class="contenedor">
-					<p class="tipo">{% trans "Tipo de denuncia" %}</p>
+					<p class="tipo">{% trans "Tipo de denuncia" %}</p>			
 					<i class="fas fa-user icon"></i>
 					<select required name="tipo" id="tipo">
 						<option value="1">{% trans "Con datos" %}</option>
@@ -31,12 +31,43 @@
 					</select>
 				</div>
 				<div class="contenedor">
-					<p class="tipo">{ % trans "Motivo" % }</p>
+					<p class="tipo">{% trans "Motivo" %}</p>
 					<i class="fas fa-users icon"></i>
 					<select required name="motivo" id="motivo">
 						<option value="1">{% trans "Abuso" %}</option>
 						<option value="2">{% trans "Acoso" %}</option>
 						<option value="3">{% trans "Maltrato" %}</option>
+					</select>
+				</div>
+				<div class="contenedor">
+					<p class="tipo">{% trans "Departamento" %}</p>
+					<select required name="departamento" id="departamento">
+						<option value="1">Lima</option>
+						<option value="2">Arequipa</option>
+						<option value="3">Cusco</option>
+						<option value="4">La Libertad</option>
+						<option value="5">Piura</option>
+						<option value="6">Lambayeque</option>
+						<option value="7">Junín</option>
+						<option value="8">Puno</option>
+						<option value="9">Ancash</option>
+						<option value="10">Ica</option>
+						<option value="11">Tacna</option>
+						<option value="12">Loreto</option>
+						<option value="13">Ucayali</option>
+						<option value="14">San Martín</option>
+						<option value="15">Madre de Dios</option>
+						<option value="16">Amazonas</option>
+						<option value="17">Pasco</option>
+						<option value="18">Huancavelica</option>
+						<option value="19">Ayacucho</option>
+						<option value="20">Tumbes</option>
+						<option value="21">Moquegua</option>
+						<option value="22">Huánuco</option>
+						<option value="23">Apurímac</option>
+						<option value="24">Cajamarca</option>
+						<option value="25">Callao</option>
+						<option value="26">Iquitos</option>
 					</select>
 				</div>
 				<div class="input-contenedor">
@@ -80,7 +111,7 @@
 					{% csrf_token %}
 					<select name="idioma" onchange="this.form.submit()">
 						<option value="es">Español</option>
-						<option value="qu">Quechua</option>
+						<option value="en">Quechua</option>
 					</select>
 					<noscript>
 						<button type="submit">Cambiar idioma</button>

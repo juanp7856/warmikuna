@@ -48,7 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.locale.LocaleMiddleware'
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'warmikuna.urls'
@@ -103,14 +103,15 @@ LANGUAGE_CODE = 'es'
 
 LANGUAGES = [
     ('en', 'English'),
-    ('es', 'Español'),
-    ('qu', 'Quechua'),
+    ('es', 'Spanish'),
+    ('qu', 'Quechua')
 ]
 
-# LOCALE_PATH = [
-#     os.path.join(BASE_DIR, "warmikuna_app/locale")
-#     ]
-LOCALE_PATH = (os.path.join(BASE_DIR, "locale"),)
+LOCALE_PATH = [
+    os.path.join(BASE_DIR, "locale/")
+    ]
+
+# LOCALE_PATH = (os.path.join(BASE_DIR, "locale"),)
 
 LANGUAGE_SESSION_KEY = '_language'
 
